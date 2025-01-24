@@ -1,80 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useAnamneseFormViewModel } from '../viewmodels/AnamneseFormViewModel'
 
 function AnamneseForm() {
-  
-  const [formData, setFormData] = useState({
-    patientName: '',
-    patientAge: '',
-    fatherName: '',
-    motherName: '',
-    career: '',
-    address: '',
-    phone: '',
-  });
-
-  
-  const [errors, setErrors] = useState({});
-
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.patientName) newErrors.patientName = 'Nome do paciente é obrigatório';
-    if (!formData.patientAge) newErrors.patientAge = 'Idade é obrigatória';
-    if (!formData.career) newErrors.career = 'Profissão é obrigatória';
-    if (!formData.address) newErrors.address = 'Endereço é obrigatório';
-    if (!formData.phone) newErrors.phone = 'Telefone é obrigatório';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validate()) {
-      // TODO chamada Api 
-
-      console.log('Dados enviados:', formData);
-      alert('Ficha de anamnese enviada com sucesso!');
-    }
-  };
-
+  const {formData, errors, isSubmitting, message ,handleChange,handleSubmit} = useAnamneseFormViewModel();
   return (
     <form onSubmit={handleSubmit}>
       <h1>Ficha de Anamnese</h1>
-
+      {message && <p>{message}</p>} 
       <div>
         <label htmlFor="patientName">Nome do Paciente:</label>
         <input
           type="text"
           id="patientName"
           name="patientName"
-          value={formData.nomePaciente}
+          value={formData.patientName}
           onChange={handleChange}
         />
         {errors.patientName && <div className="error">{errors.patientName}</div>}
       </div>
-
+      
       <div>
         <label htmlFor="patientAge">Idade:</label>
         <input
           type="number"
           id="patientAge"
           name="patientAge"
-          value={formData.idade}
+          value={formData.patientAge}
           onChange={handleChange}
         />
-        {errors.idade && <div className="error">{errors.patientAge}</div>}
+        {errors.patientAge && <div className="error">{errors.patientAge}</div>}
+      </div>
+
+      <div>
+        <label htmlFor="birthDate">Data de nascimento:</label>
+        <input
+          type="date"
+          id="birthDate"
+          name="birthDate"
+          value={formData.birthDate}
+          onChange={handleChange}
+          max={new Date().toISOString().split("T")[0]}
+        />
+        {errors.patientAge && <div className="error">{errors.birthDate}</div>}
       </div>
 
       <div>
@@ -86,7 +53,6 @@ function AnamneseForm() {
           value={formData.fatherName}
           onChange={handleChange}
         />
-    
       </div>
 
       <div>
@@ -98,7 +64,6 @@ function AnamneseForm() {
           value={formData.motherName}
           onChange={handleChange}
         />
-        
       </div>
 
       <div>
@@ -131,13 +96,13 @@ function AnamneseForm() {
           type="tel"
           id="phone"
           name="phone"
-          value={formData.telefone}
+          value={formData.phone} 
           onChange={handleChange}
         />
         {errors.phone && <div className="error">{errors.phone}</div>}
       </div>
 
-      <button type="submit">Enviar Ficha</button>
+      <button type="submit" disabled ={isSubmitting}>{isSubmitting ? "Enviando..." : "Enviar"}</button>
     </form>
   );
 }

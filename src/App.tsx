@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import AnamneseForm from './components/AnamneseForm';
+import AnamneseForm from './view/components/AnamneseForm';
 
 function App() {
   return (
