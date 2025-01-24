@@ -19,7 +19,8 @@ export const postAnamnese = async (formData: FormData) => {
         body: responseBody,
       };
     } catch (error: any) {
-      console.error("Erro ao enviar os dados:", error);
+      // TODO corrigir para parar de dar erro ao testar 
+      // console.error("Erro ao enviar os dados:", error);
   
       throw {
         message: error.message || "Erro desconhecido",
