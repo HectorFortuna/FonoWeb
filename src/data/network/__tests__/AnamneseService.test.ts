@@ -64,4 +64,34 @@ describe("postAnamnese", () => {
       body: JSON.stringify(formData),
     });
   });
+
+  it("deve retornar null no corpo da resposta se response.json falhar", async () => {
+    const mockResponse = {
+      ok: true,
+      status: 200,
+      json: jest.fn().mockRejectedValue(new Error("Erro ao processar JSON")),
+    };
+
+    (fetch as jest.Mock).mockResolvedValue(mockResponse);
+
+    const formData = {
+      patientName: "John Doe",
+      patientAge: "30",
+      birthDate: "1990-01-01",
+      fatherName: "Father Doe",
+      motherName: "Mother Doe",
+      address: "123 Main St",
+      phone: "123-456-7890",
+      career: "Software Developer",
+    };
+
+    const result = await postAnamnese(formData);
+
+    expect(result).toEqual({
+      status: 200,
+      ok: true,
+      body: null, 
+    });
+  });
+
 });

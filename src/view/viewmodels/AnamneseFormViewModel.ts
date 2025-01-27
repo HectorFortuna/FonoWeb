@@ -50,11 +50,8 @@ export const useAnamneseFormViewModel = () => {
       
             if (response.ok) {
               setMessage(`Ficha enviada com sucesso! ID gerado: ${response.body?.id || "N/A"}`);
-            } else {
-              setMessage(`Erro ao enviar os dados: ${response.status} - ${response.body?.message || "Erro desconhecido"}`);
-            }
+            } 
           } catch (error: any) {
-            // Exibe uma mensagem clara sobre o erro
             setMessage(`Erro de conexão: ${error.message}`);
             console.error("Erro ao enviar os dados:", error.details || error);
           } finally {
