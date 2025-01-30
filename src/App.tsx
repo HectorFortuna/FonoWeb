@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import AnamneseForm from './view/components/AnamneseForm';
+import { ContactForm } from './view/page/ContactForm';
 
 function App() {
   return (
     <div className="App">
-      <AnamneseForm/>
+      <ContactForm/>
     </div>
   );
 }

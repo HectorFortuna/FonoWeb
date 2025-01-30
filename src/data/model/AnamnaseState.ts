@@ -1,12 +1,14 @@
 export interface FormData {
+  school: string;
   patientName: string;
-  patientAge: string;
-  birthDate: string;
   fatherName: string;
   motherName: string;
-  career: string;
-  address: string;
+  birthDate: string;
+  age: string;
   phone: string;
+  profession: string;
+  addresses: string[];
+  siblings: { name: string; age: string }[];
 }
 
 export interface Errors {
