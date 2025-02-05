@@ -4,11 +4,14 @@ import styles from "./Button.module.css";
 interface ButtonProps {
   label: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
+  className?: string;
+  variant?: "primary" | "secondary";
 }
 
-export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ label, onClick, type = "button", className, variant = "primary" }) => {
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button className={`${styles.button} ${styles[variant]} ${className || ""}`} onClick={onClick} type={type}>
       {label}
     </button>
   );

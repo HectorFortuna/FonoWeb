@@ -7,7 +7,16 @@ export interface FormData {
   age: string;
   phone: string;
   profession: string;
-  addresses: string[];
+  addresses: [
+    {
+      street: "",
+      number: "",
+      neighborhood: "",
+      city: "",
+      state: "",
+      cep: "",
+    },
+  ],
   siblings: { name: string; age: string }[];
 }
 

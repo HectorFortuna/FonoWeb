@@ -1,50 +1,49 @@
-/* Faz o formulário ocupar a tela toda e começar bem no canto esquerdo e topo */
-.container {
-  width: 100vw; /* Ocupa toda a largura */
-  height: 100vh; /* Ocupa toda a altura */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Alinha os inputs à esquerda */
-  justify-content: flex-start; /* Mantém os itens no topo */
-  background: #f8f9fa;
-  padding: 10px; /* Reduz o espaçamento para deixar os inputs próximos do início */
-  overflow-x: hidden;
-}
-
-/* O formulário agora ocupa toda a largura e se ajusta */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Reduz o espaço entre os inputs */
+  gap: 10px; 
   width: 100%;
-  max-width: 1400px;
+  max-width: none;
+  position: relative;
 }
 
-/* Inputs que ocupam a tela quase toda */
-.full-width {
-  width: 98%; /* Deixa um pequeno espaço para não encostar na borda direita */
-}
-
-/* Inputs lado a lado */
-.inline-group {
+.buttonContainer {
   display: flex;
-  gap: 10px;
-  width: 98%; /* Ocupa quase toda a largura */
+  justify-content: flex-end; 
+  width: 100%;
+  margin-top: 10px; 
 }
 
-/* Cada input dentro do grupo ocupa metade do espaço */
-.inline-group > input {
-  flex: 1;
+.buttonAction {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: auto;
+  min-width: 120px;
+}
+
+.buttonAction:hover {
+  background-color: #0056b3;
+}
+
+.buttonAction:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .container {
-    padding: 5px; /* Ajuste para telas pequenas */
+  .buttonContainer {
+    justify-content: flex-end; /* No mobile, ainda mantém alinhado à direita */
   }
 
-  .inline-group {
-    flex-direction: column; /* No mobile, os inputs ficam um abaixo do outro */
-    width: 100%;
+  .buttonAction {
+    font-size: 14px;
+    padding: 10px 18px;
   }
 }
