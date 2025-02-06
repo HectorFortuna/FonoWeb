@@ -9,16 +9,24 @@
 
 .buttonContainer {
   display: flex;
+  gap: 10px;
   justify-content: flex-end; 
   width: 100%;
-  margin-top: 10px; 
+  margin-top: 10px;
+}
+.buttonPagesContainer{
+  display: flex;
+  gap: 10px;
+  justify-content: space-between; 
+  width: 100%;
+  margin-top: 10px;
 }
 
 .buttonAction {
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
-  background-color: #007bff;
+  background-color: purple;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -27,12 +35,28 @@
   min-width: 120px;
 }
 
-.buttonAction:hover {
-  background-color: #0056b3;
-}
-
 .buttonAction:disabled {
   background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.addressContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre os elementos */
+}
+
+.buttonRemove {
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.buttonRemove:disabled {
+  background-color: gray;
   cursor: not-allowed;
 }
 

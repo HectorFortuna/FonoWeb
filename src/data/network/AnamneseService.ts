@@ -1,7 +1,7 @@
 
-import { FormData } from "../model/AnamnaseState";
+import { PatientFormData } from "../model/AnamnaseState";
 
-export const postAnamnese = async (formData: FormData) => {
+export const postAnamnese = async (formData: PatientFormData) => {
     try {
       const response = await fetch("http://10.0.0.101:8080/api/register", {
         method: "POST",

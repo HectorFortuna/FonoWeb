@@ -1,6 +1,6 @@
 import { AnamneseRepository } from "../AnamneseRepository";
 
-import { FormData } from "../../model/AnamnaseState";
+import { PatientFormData } from "../../model/AnamnaseState";
 import { postAnamnese } from "../../network/AnamneseService";
 
 
@@ -10,7 +10,7 @@ jest.mock("../../network/AnamneseService", () => ({
 
 describe("AnamneseRepository", () => {
     it("should call postAnamnese with the correct arguments", async () => {
-        const formData: FormData = {
+        const formData: PatientFormData = {
             patientName: "John Doe",
             patientAge: "30",
             birthDate: "1990-01-01",
@@ -28,7 +28,7 @@ describe("AnamneseRepository", () => {
     });
 
     it("should throw an error if postAnamnese throws an error", async () => {
-        const formData: FormData = {
+        const formData: PatientFormData = {
             patientName: "John Doe",
             patientAge: "30",
             birthDate: "1990-01-01",

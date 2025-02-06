@@ -1,102 +1,123 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormGroup } from "../components/molecules/form_groups/FormGroup";
 import { AddressFormGroup } from "../components/molecules/form_groups/AddressFormGroup";
 import { Button } from "../components/atoms/button/Button";
-import styles from "./ContactForm.module.css";
+import { useFormStore } from "../../states/ZustandCache";
+import { Form, useNavigate } from "react-router-dom";
+import styles from "./Form.module.css";
 
 export const ContactForm: React.FC = () => {
-  const [formData, setFormData] = useState({
-    patientName: "",
-    school: "",
-    fatherName: "",
-    motherName: "",
-    birthDate: "",
-    age: "",
-    phone: "",
-    profession: "",
-    addresses: [
-      { street: "", number: "", neighborhood: "", city: "", state: "", cep: "" },
-    ],
-    siblings: [{ name: "", age: "" }],
-  });
+  const { formData, setField, setSibling, addSibling, removeSiblings } = useFormStore();
+  const navigate = useNavigate(); // Navegação entre telas
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleAddressChange = (index: number, field: string, value: string) => {
-    const newAddresses = [...formData.addresses];
-    newAddresses[index] = { ...newAddresses[index], [field]: value };
-    setFormData({ ...formData, addresses: newAddresses });
-  };
-
-  const addAddress = () => {
-    setFormData({
-      ...formData,
-      addresses: [
-        ...formData.addresses,
-        { street: "", number: "", neighborhood: "", city: "", state: "", cep: "" },
-      ],
-    });
-  };
-  
-
-  const handleSiblingChange = (index: number, field: "name" | "age", value: string) => {
-    const newSiblings = [...formData.siblings];
-    newSiblings[index][field] = value;
-    setFormData({ ...formData, siblings: newSiblings });
-  };
-
-  const addSibling = () => {
-    setFormData({
-      ...formData,
-      siblings: [...formData.siblings, { name: "", age: "" }],
-    });
-  };
-  
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Formulário enviado!");
-    console.log("Dados:", formData);
-  };
-  
-  const handleClickSubmit = () => {
-    handleSubmit({ preventDefault: () => {} } as React.FormEvent<HTMLFormElement>);
+    console.log("Dados do formulário:", formData);
+    navigate("/address-form"); 
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-    <FormGroup type="text" name="patientName" placeholder="Nome do Paciente" value={formData.patientName} onChange={handleChange} required />
-    <FormGroup type="text" name="school" placeholder="Escola" value={formData.school} onChange={handleChange} />
-    <FormGroup type="text" name="fatherName" placeholder="Nome do Pai" value={formData.fatherName} onChange={handleChange} />
-    <FormGroup type="text" name="motherName" placeholder="Nome da Mãe" value={formData.motherName} onChange={handleChange} />
-    <FormGroup type="date" name="birthDate" placeholder="Data de Nascimento" value={formData.birthDate} onChange={handleChange} required />
-    <FormGroup type="number" name="age" placeholder="Idade" value={formData.age} onChange={handleChange} />
-    <FormGroup type="tel" name="phone" placeholder="Número de Telefone" value={formData.phone} onChange={handleChange} />
-    <FormGroup type="text" name="profession" placeholder="Profissão" value={formData.profession} onChange={handleChange} />
-  
-    {formData.addresses.map((address, index) => (
-      <AddressFormGroup key={index} index={index} address={address} onAddressChange={handleAddressChange} />
-    ))}
-  
-        <div className={styles.buttonContainer}>
-      <Button label="Adicionar Endereço" onClick={addAddress} className={styles.buttonAction} variant="secondary" />
-    </div>
-  
-    {formData.siblings.map((sibling, index) => (
-      <div key={index} className={styles.siblingContainer}>
-        <FormGroup type="text" name={`siblingName-${index}`} placeholder="Nome do Irmão" value={sibling.name} onChange={(e) => handleSiblingChange(index, "name", e.target.value)} />
-        <FormGroup type="number" name={`siblingAge-${index}`} placeholder="Idade do Irmão" value={sibling.age} onChange={(e) => handleSiblingChange(index, "age", e.target.value)} />
-      </div>
-    ))}
-  
-   <div className={styles.buttonContainer}>
-      <Button label="Adicionar Irmão" onClick={addSibling} className={styles.buttonAction} variant="secondary" />
-    </div>
+      <FormGroup
+        type="text"
+        name="patientName"
+        placeholder="Nome do Paciente"
+        value={formData.patientName || ""}
+        onChange={(e) => setField("patientName", e.target.value)}
+        required
+      />
+      <FormGroup
+        type="text"
+        name="school"
+        placeholder="Escola"
+        value={formData.school || ""}
+        onChange={(e) => setField("school", e.target.value)}
+      />
+      <FormGroup
+        type="text"
+        name="fatherName"
+        placeholder="Nome do Pai"
+        value={formData.fatherName || ""}
+        onChange={(e) => setField("fatherName", e.target.value)}
+      />
+      <FormGroup
+        type="text"
+        name="motherName"
+        placeholder="Nome da Mãe"
+        value={formData.motherName || ""}
+        onChange={(e) => setField("motherName", e.target.value)}
+      />
 
-    <div className={styles.buttonContainer}>
-      <Button label="Avançar" onClick={handleClickSubmit} className={styles.buttonAction} variant="primary" />
-    </div>
-  </form>
+      <FormGroup
+        type="date"
+        name="birthDate"
+        placeholder="Data de Nascimento"
+        value={formData.birthDate || ""}
+        onChange={(e) => setField("birthDate", e.target.value)}
+      />
+
+      <FormGroup
+        type="number"
+        name="age"
+        placeholder="Idade"
+        value={formData.age || ""}
+        onChange={(e) => setField("age", e.target.value)} 
+        />
+
+      <FormGroup
+        type="tel"
+        name="phone"
+        placeholder="Telefone"
+        value={formData.phone || ""}
+        onChange={(e) => setField("phone", e.target.value)}
+
+      />
+      <FormGroup
+        type="text"
+        name="career"
+        placeholder="Profissão"
+        value={formData.career || ""}
+        onChange={(e) => setField("career", e.target.value)}
+      />
+
+
+      {/* Campos de Endereço */}
+      
+
+      {/* Campos de Irmãos */}
+      {formData.siblings?.map((sibling, index) => (
+        <div key={index} className={styles.siblingContainer}>
+          <FormGroup
+            type="text"
+            name={`siblingName-${index}`}
+            placeholder="Nome do Irmão"
+            value={sibling.name || ""}
+            onChange={(e) => setSibling(index, "name", e.target.value)}
+          />
+          <FormGroup
+            type="number"
+            name={`siblingAge-${index}`}
+            placeholder="Idade do Irmão"
+            value={sibling.age || ""}
+            onChange={(e) => setSibling(index, "age", e.target.value)}
+          />
+        </div>
+      ))}
+
+      <div className={styles.buttonContainer}>
+      <Button
+          label="Remover Irmão"
+          onClick={() => removeSiblings((formData.siblings?.length ?? 0) - 1)}
+          className={styles.buttonRemove}
+          variant="danger"
+          disabled={(formData.siblings?.length ?? 0) <= 0}/>
+
+        <Button label="Adicionar Irmão" onClick={addSibling} className={styles.buttonAction} variant="secondary" />
+      </div>
+
+      <div className={styles.buttonContainer}>
+        <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
+      </div>
+    </form>
   );
 };

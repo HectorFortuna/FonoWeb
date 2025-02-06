@@ -1,13 +1,43 @@
-import React from 'react';
-import './App.css';
-import { ContactForm } from './view/page/ContactForm';
+import React, {useEffect} from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ContactForm } from "./view/page/ContactForm";
+import { AddressForm } from "./view/page/AddressForm";
+import { PregnancyForm } from "./view/page/PregnancyForm";
+import { useFormStore } from "./states/ZustandCache";
 
-function App() {
+
+const App: React.FC = () => {
+  const { clearAllForm } = useFormStore();
+
+  useEffect(() => {
+    localStorage.removeItem("multi-step-form");
+    clearAllForm();
+    
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (window.confirm("Tem certeza que deseja sair? Seus dados serão perdidos.")) {
+        localStorage.removeItem("multi-step-form")
+        clearAllForm(); 
+        return true; 
+      } else {
+        event.preventDefault();
+        return false; 
+      }
+    };
+      window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [clearAllForm]);
+
   return (
-    <div className="App">
-      <ContactForm/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<ContactForm />} />
+        <Route path="/address-form" element={<AddressForm />} />
+        <Route path="/pregnancy-form" element={<PregnancyForm />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
