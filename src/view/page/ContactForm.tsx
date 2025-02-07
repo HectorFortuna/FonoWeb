@@ -1,20 +1,24 @@
 import React from "react";
 import { FormGroup } from "../components/molecules/form_groups/FormGroup";
-import { AddressFormGroup } from "../components/molecules/form_groups/AddressFormGroup";
 import { Button } from "../components/atoms/button/Button";
 import { useFormStore } from "../../states/ZustandCache";
 import { Form, useNavigate } from "react-router-dom";
-import styles from "./Form.module.css";
+import styles from "./style/Form.module.css";
 
 export const ContactForm: React.FC = () => {
   const { formData, setField, setSibling, addSibling, removeSiblings } = useFormStore();
-  const navigate = useNavigate(); // Navegação entre telas
+  const navigate = useNavigate();  
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Dados do formulário:", formData);
     navigate("/address-form"); 
   };
+
+  const siblings = formData.siblings && formData.siblings.length > 0
+                ? formData.siblings
+                : [{ name: "", age: "" }];
+  
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -79,11 +83,6 @@ export const ContactForm: React.FC = () => {
         value={formData.career || ""}
         onChange={(e) => setField("career", e.target.value)}
       />
-
-
-      {/* Campos de Endereço */}
-      
-
       {/* Campos de Irmãos */}
       {formData.siblings?.map((sibling, index) => (
         <div key={index} className={styles.siblingContainer}>
@@ -107,10 +106,11 @@ export const ContactForm: React.FC = () => {
       <div className={styles.buttonContainer}>
       <Button
           label="Remover Irmão"
-          onClick={() => removeSiblings((formData.siblings?.length ?? 0) - 1)}
+          onClick={() => removeSiblings(siblings.length - 1 )}
           className={styles.buttonRemove}
           variant="danger"
-          disabled={(formData.siblings?.length ?? 0) <= 0}/>
+          disabled={siblings.length <= 1} 
+        />
 
         <Button label="Adicionar Irmão" onClick={addSibling} className={styles.buttonAction} variant="secondary" />
       </div>

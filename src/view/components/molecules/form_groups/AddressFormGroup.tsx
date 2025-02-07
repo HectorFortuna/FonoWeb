@@ -23,42 +23,42 @@ export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({ index, addre
         type="text"
         name={`street-${index}`}
         placeholder="Rua"
-        value={address.street || ""} // ✅ Agora sempre terá um valor válido
+        value={address.street ?? ""}
         onChange={(e) => onAddressChange(index, "street", e.target.value)}
       />
       <FormGroup
         type="text"
         name={`number-${index}`}
         placeholder="Número"
-        value={address.number || ""} // ✅ Corrigindo o erro de `undefined`
+        value={address.number ?? ""} 
         onChange={(e) => onAddressChange(index, "number", e.target.value)}
       />
       <FormGroup
         type="text"
         name={`neighborhood-${index}`}
         placeholder="Bairro"
-        value={address.neighborhood || ""}
+        value={address.neighborhood ?? ""}
         onChange={(e) => onAddressChange(index, "neighborhood", e.target.value)}
       />
       <FormGroup
         type="text"
         name={`city-${index}`}
         placeholder="Cidade"
-        value={address.city || ""}
+        value={address.city ?? ""}
         onChange={(e) => onAddressChange(index, "city", e.target.value)}
       />
       <FormGroup
         type="text"
         name={`state-${index}`}
         placeholder="Estado"
-        value={address.state || ""}
+        value={address.state ?? ""}
         onChange={(e) => onAddressChange(index, "state", e.target.value)}
       />
       <FormGroup
         type="text"
         name={`cep-${index}`}
         placeholder="CEP"
-        value={address.cep || ""}
+        value={address.cep ?? ""}
         onChange={(e) => onAddressChange(index, "cep", e.target.value)}
       />
     </div>

@@ -1,11 +1,9 @@
-
-//iniciar os checkbox nao selecionados como false mandar para o cache
 import React from "react";
 import { FormGroup } from "../components/molecules/form_groups/FormGroup";
 import { Button } from "../components/atoms/button/Button";
 import { useFormStore } from "../../states/ZustandCache";
 import { useNavigate } from "react-router-dom";
-import styles from "./Form.module.css";
+import styles from "./style/Form.module.css";
 
 export const PregnancyForm = () => {
   const { pregnancyFormData, setPregnancyField } = useFormStore();
@@ -13,8 +11,7 @@ export const PregnancyForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Dados do formulário:", pregnancyFormData);
-    navigate("/next-form"); // 🔹 Redireciona para a próxima tela
+    navigate("/nutrition-form"); 
   };
 
   const handleBack = () => { 
@@ -39,24 +36,21 @@ export const PregnancyForm = () => {
         <input type="checkbox" checked={pregnancyFormData.prenatalTreatment } onChange={(e) => setPregnancyField("prenatalTreatment", e.target.checked)} />
       </label>
 
-      <label>
-        Uso de Medicamento Durante a Gravidez:
-        <input type="checkbox" checked={pregnancyFormData.medicationsDuringPregnancy} onChange={(e) => setPregnancyField("medicationsDuringPregnancy", e.target.checked)} />
-      </label>
+      <FormGroup type="text" name="medicationsDuringPregnancy" placeholder="Medicamentos" value={pregnancyFormData.medicationsDuringPregnancy || ""} onChange={(e) => setPregnancyField("medicationsDuringPregnancy", e.target.value)} />
 
       <label>
         Hipotensão:
-        <input type="checkbox" checked={pregnancyFormData.hypotension || false} onChange={(e) => setPregnancyField("hypotension", e.target.checked)} />
+        <input type="checkbox" checked={pregnancyFormData.hypotension } onChange={(e) => setPregnancyField("hypotension", e.target.checked)} />
       </label>
 
       <label>
         Hipertensão:
-        <input type="checkbox" checked={pregnancyFormData.hypertension || false} onChange={(e) => setPregnancyField("hypertension", e.target.checked)} />
+        <input type="checkbox" checked={pregnancyFormData.hypertension } onChange={(e) => setPregnancyField("hypertension", e.target.checked)} />
       </label>
 
       <label>
         Anemia:
-        <input type="checkbox" checked={pregnancyFormData.anemia|| false} onChange={(e) => setPregnancyField("anemia", e.target.checked)} />
+        <input type="checkbox" checked={pregnancyFormData.anemia} onChange={(e) => setPregnancyField("anemia", e.target.checked)} />
       </label>
 
       <FormGroup type="text" name="duracaoParto" placeholder="Duração do Parto" value={pregnancyFormData.deliveryDuration || ""} onChange={(e) => setPregnancyField("deliveryDuration", e.target.value)} />
@@ -105,6 +99,8 @@ export const PregnancyForm = () => {
         Cianose:
         <input type="checkbox" checked={pregnancyFormData.cyanosis || false} onChange={(e) => setPregnancyField("cyanosis", e.target.checked)} />
       </label>
+
+      <FormGroup type="text" name="observacoes" placeholder="Observações" value={pregnancyFormData.observations || ""} onChange={(e) => setPregnancyField("observations", e.target.value)} />
 
       {/* Botões de ação */}
       <div className={styles.buttonPagesContainer}>
