@@ -1,0 +1,21 @@
+.addressContainer {
+  display: flex;
+  flex-direction: column;
+  /* Faz com que cada endereço fique em uma linha */
+  gap: 20px;
+  /* Adiciona espaçamento entre os endereços */
+  background: #ffeff6;
+  /* Gradiente rosa claro */
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  /* Garante espaçamento entre os grupos de endereço */
+}
+
+@media (max-width: 600px) {
+  .addressContainer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

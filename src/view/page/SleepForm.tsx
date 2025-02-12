@@ -1,9 +1,10 @@
 import React from "react";
 import { FormGroup } from "../components/molecules/form_groups/FormGroup";
 import { Button } from "../components/atoms/button/Button";
-import { useFormStore} from "../../states/ZustandCache";
+import { useFormStore } from "../../states/ZustandCache";
 import { useNavigate } from "react-router-dom";
 import styles from "./style/Form.module.css";
+import { CheckboxGroup } from "view/components/molecules/checkbox/CheckboxGroup";
 
 
 export const SleepForm = () => {
@@ -12,55 +13,65 @@ export const SleepForm = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/psychomotor-development-form"); 
+        navigate("/psychomotor-development-form");
     };
 
     const handleBack = () => {
         navigate("/nutrition-form");
     };
 
-    return(
+    return (
         <form className={styles.form} onSubmit={handleSubmit}>
             {/* Campos do formulário */}
-            <label>
-                Normal:
-                <input type="checkbox" checked={sleepFormData.normal} onChange={(e) => setSleepField("normal", e.target.checked)} />
-            </label>
 
-            <label>
-                Agitado:
-                <input type="checkbox" checked={sleepFormData.restless} onChange={(e) => setSleepField("restless", e.target.checked)} />
-            </label>
-
-            <label>
-                Fala durante o sono:
-                <input type="checkbox" checked={sleepFormData.talksDuringSleep} onChange={(e) => setSleepField("talksDuringSleep", e.target.checked)} />
-            </label>
-
-            <label>
-                Enurese Noturna:
-                <input type="checkbox" checked={sleepFormData.nocturnalEnuresis} onChange={(e) => setSleepField("nocturnalEnuresis", e.target.checked)} />
-            </label>
-
-            <label>
-                Ranger de Dentes:
-                <input type="checkbox" checked={sleepFormData.teethGrinding} onChange={(e) => setSleepField("teethGrinding", e.target.checked)} />
-            </label>
-
-            <label>
-                Sonambulismo:
-                <input type="checkbox" checked={sleepFormData.sleepwalking} onChange={(e) => setSleepField("sleepwalking", e.target.checked)} />
-            </label>
-
-            <label>
-                Dorme com a boca aberta:
-                <input type="checkbox" checked={sleepFormData.sleepsWithMouthOpen} onChange={(e) => setSleepField("sleepsWithMouthOpen", e.target.checked)} />
-            </label>
-
-            <label>
-                Babar:
-                <input type="checkbox" checked={sleepFormData.drools} onChange={(e) => setSleepField("drools", e.target.checked)} />
-            </label>
+            <CheckboxGroup
+                name="normal"
+                label="Normal"
+                checked={sleepFormData.normal || false}
+                onChange={(e) => setSleepField("normal", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="restless"
+                label="Agitado"
+                checked={sleepFormData.restless || false}
+                onChange={(e) => setSleepField("restless", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="talksDuringSleep"
+                label="Fala enquanto dorme"
+                checked={sleepFormData.talksDuringSleep || false}
+                onChange={(e) => setSleepField("talksDuringSleep", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="nocturnalEnuresis"
+                label="Enurese noturna"
+                checked={sleepFormData.nocturnalEnuresis || false}
+                onChange={(e) => setSleepField("nocturnalEnuresis", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="teethGrinding"
+                label="Range os dentes"
+                checked={sleepFormData.teethGrinding || false}
+                onChange={(e) => setSleepField("teethGrinding", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="sleepwalking"
+                label="Sonambulismo"
+                checked={sleepFormData.sleepwalking || false}
+                onChange={(e) => setSleepField("sleepwalking", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="sleepsWithMouthOpen"
+                label="Dorme com a boca aberta"
+                checked={sleepFormData.sleepsWithMouthOpen || false}
+                onChange={(e) => setSleepField("sleepsWithMouthOpen", e.target.checked)}
+            />
+            <CheckboxGroup
+                name="drools"
+                label="Baba enquanto dorme"
+                checked={sleepFormData.drools || false}
+                onChange={(e) => setSleepField("drools", e.target.checked)}
+            />
 
             <FormGroup type="text" name="observations" placeholder="Observações" value={sleepFormData.observations || ""} onChange={(e) => setSleepField("observations", e.target.value)} />
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { FormGroup } from "./FormGroup";
+import { FormGroup } from "../form_groups/FormGroup";
+import styles from "./AddressFormGroup.module.css";
 
 interface Address {
   street?: string;
@@ -18,7 +19,7 @@ interface AddressFormGroupProps {
 
 export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({ index, address, onAddressChange }) => {
   return (
-    <div>
+    <div className={styles.addressContainer}>
       <FormGroup
         type="text"
         name={`street-${index}`}
@@ -30,7 +31,7 @@ export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({ index, addre
         type="text"
         name={`number-${index}`}
         placeholder="Número"
-        value={address.number ?? ""} 
+        value={address.number ?? ""}
         onChange={(e) => onAddressChange(index, "number", e.target.value)}
       />
       <FormGroup

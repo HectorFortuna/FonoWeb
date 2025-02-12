@@ -7,18 +7,18 @@ import styles from "./style/Form.module.css";
 
 export const ContactForm: React.FC = () => {
   const { formData, setField, setSibling, addSibling, removeSiblings } = useFormStore();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Dados do formulário:", formData);
-    navigate("/address-form"); 
+    navigate("/address-form");
   };
 
   const siblings = formData.siblings && formData.siblings.length > 0
-                ? formData.siblings
-                : [{ name: "", age: "" }];
-  
+    ? formData.siblings
+    : [{ name: "", age: "" }];
+
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -65,8 +65,8 @@ export const ContactForm: React.FC = () => {
         name="age"
         placeholder="Idade"
         value={formData.age || ""}
-        onChange={(e) => setField("age", e.target.value)} 
-        />
+        onChange={(e) => setField("age", e.target.value)}
+      />
 
       <FormGroup
         type="tel"
@@ -104,12 +104,12 @@ export const ContactForm: React.FC = () => {
       ))}
 
       <div className={styles.buttonContainer}>
-      <Button
+        <Button
           label="Remover Irmão"
-          onClick={() => removeSiblings(siblings.length - 1 )}
+          onClick={() => removeSiblings(siblings.length - 1)}
           className={styles.buttonRemove}
           variant="danger"
-          disabled={siblings.length <= 1} 
+          disabled={siblings.length <= 1}
         />
 
         <Button label="Adicionar Irmão" onClick={addSibling} className={styles.buttonAction} variant="secondary" />

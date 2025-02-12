@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ContactForm } from "./view/page/ContactForm";
 import { AddressForm } from "./view/page/AddressForm";
@@ -8,6 +8,11 @@ import { NutritionForm } from "./view/page/NutritionForm";
 import { SleepForm } from "./view/page/SleepForm";
 import { PsychomotorDevelopment } from "view/page/PsychomotorDevelopment";
 import { LanguageDevelopment } from "view/page/LanguageDevelopment";
+import { PhatologicalHistory } from "view/page/PhatologicalHistoryFormData";
+import { IndependenceComprehension } from "view/page/IndependenceComprehensionFormData";
+import { SchoolHistory } from "view/page/SchoolHistoryFormData";
+import { RecreationForm } from "view/page/RecreationFormData";
+import { FamilyInterrelationForm } from "view/page/FamilyInterrelationFormData";
 
 
 
@@ -17,18 +22,18 @@ const App: React.FC = () => {
   useEffect(() => {
     localStorage.removeItem("multi-step-form");
     clearAllForm();
-    
+
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (window.confirm("Tem certeza que deseja sair? Seus dados serão perdidos.")) {
         localStorage.removeItem("multi-step-form")
-        clearAllForm(); 
-        return true; 
+        clearAllForm();
+        return true;
       } else {
         event.preventDefault();
-        return false; 
+        return false;
       }
     };
-      window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
@@ -44,6 +49,11 @@ const App: React.FC = () => {
         <Route path="/sleep-form" element={<SleepForm />} />
         <Route path="/psychomotor-development-form" element={<PsychomotorDevelopment />} />
         <Route path="/language-development-form" element={<LanguageDevelopment />} />
+        <Route path="/phatological-history-form" element={<PhatologicalHistory />} />
+        <Route path="/independence-form" element={<IndependenceComprehension />} />
+        <Route path="/school-history-form" element={<SchoolHistory />} />
+        <Route path="/recreation-form" element={<RecreationForm />} />
+        <Route path="/family-interrelation-form" element={<FamilyInterrelationForm />} />
       </Routes>
     </Router>
   );

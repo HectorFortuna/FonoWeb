@@ -1,13 +1,14 @@
 import React from "react";
 import { FormGroup } from "../components/molecules/form_groups/FormGroup";
 import { Button } from "../components/atoms/button/Button";
-import { useFormStore} from "../../states/ZustandCache";
+import { useFormStore } from "../../states/ZustandCache";
 import { Form, useNavigate } from "react-router-dom";
 import styles from "./style/Form.module.css";
+import { CheckboxGroup } from "view/components/molecules/checkbox/CheckboxGroup";
 
 
 export const LanguageDevelopment: React.FC = () => {
-    const{ languageDevelopmentFormData, setLanguageDevelopmentField } = useFormStore();
+    const { languageDevelopmentFormData, setLanguageDevelopmentField } = useFormStore();
     const navigate = useNavigate();
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -19,7 +20,7 @@ export const LanguageDevelopment: React.FC = () => {
         navigate("/psychomotor-development-form");
     };
 
-    return(
+    return (
         <form className={styles.form} onSubmit={handleSubmit}>
 
             <FormGroup type="text" name="babbled" placeholder="Quando começou a balbuciar" value={languageDevelopmentFormData.babbled || ""} onChange={(e) => setLanguageDevelopmentField("babbled", e.target.value)} />
@@ -34,45 +35,51 @@ export const LanguageDevelopment: React.FC = () => {
 
             <FormGroup type="text" name="stutteredAround" placeholder="Gaguejou em torno de" value={languageDevelopmentFormData.stutteredAround || ""} onChange={(e) => setLanguageDevelopmentField("stutteredAround", e.target.value)} />
 
-            <label>
-                Entende comandos:
-                <input type="checkbox" checked={languageDevelopmentFormData.understandsCommands} onChange={(e) => setLanguageDevelopmentField("understandsCommands", e.target.checked)} />
-            </label>
+            <CheckboxGroup
+                name="understandsCommands" label="Entende comandos" checked={languageDevelopmentFormData.understandsCommands || false} onChange={(e) => setLanguageDevelopmentField("understandsCommands", e.target.checked)}
+            />
 
-            <label>
-                Emite sons primitivos:
-                <input type="checkbox" checked={languageDevelopmentFormData.emitsPrimitiveSound} onChange={(e) => setLanguageDevelopmentField("emitsPrimitiveSound", e.target.checked)} />
-            </label>
+            <CheckboxGroup
+                name="emitsPrimitiveSound"
+                label="Emite sons primitivos"
+                checked={languageDevelopmentFormData.emitsPrimitiveSound || false}
+                onChange={(e) => setLanguageDevelopmentField("emitsPrimitiveSound", e.target.checked)}
+            />
 
-            <label>
-                Linguagem entendida:
-                <input type="checkbox" checked={languageDevelopmentFormData.languageUnderstood} onChange={(e) => setLanguageDevelopmentField("languageUnderstood", e.target.checked)} />
-            </label>
-            
+            <CheckboxGroup
+                name="languageUnderstood"
+                label="Linguagem entendida"
+                checked={languageDevelopmentFormData.languageUnderstood || false}
+                onChange={(e) => setLanguageDevelopmentField("languageUnderstood", e.target.checked)}
+            />
 
-            <label>
-                Usa gestos:
-                <input type="checkbox" checked={languageDevelopmentFormData.usesGesture} onChange={(e) => setLanguageDevelopmentField("usesGesture", e.target.checked)} />
-            </label>
+            <CheckboxGroup
+                name="usesGesture"
+                label="Usa gestos"
+                checked={languageDevelopmentFormData.usesGesture || false}
+                onChange={(e) => setLanguageDevelopmentField("usesGesture", e.target.checked)}
+            />
 
-            <label>
-                Canta:
-                <input type="checkbox" checked={languageDevelopmentFormData.sings} onChange={(e) => setLanguageDevelopmentField("sings", e.target.checked)} />
-            </label>
+            <CheckboxGroup
+                name="sings"
+                label="Canta"
+                checked={languageDevelopmentFormData.sings || false}
+                onChange={(e) => setLanguageDevelopmentField("sings", e.target.checked)}
+            />
 
-            <label>
-                Conhece músicas:
-                <input type="checkbox" checked={languageDevelopmentFormData.knowsSongs} onChange={(e) => setLanguageDevelopmentField("knowsSongs", e.target.checked)} />
-
-            </label>
-
+            <CheckboxGroup
+                name="knowsSongs"
+                label="Conhece músicas"
+                checked={languageDevelopmentFormData.knowsSongs || false}
+                onChange={(e) => setLanguageDevelopmentField("knowsSongs", e.target.checked)}
+            />
             <FormGroup type="text" name="observations" placeholder="Observações" value={languageDevelopmentFormData.observations || ""} onChange={(e) => setLanguageDevelopmentField("observations", e.target.value)} />
 
             <div className={styles.buttonPagesContainer}>
                 <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
                 <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
             </div>
-            
+
 
         </form>
     )
