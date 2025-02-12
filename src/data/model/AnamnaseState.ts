@@ -1,14 +1,14 @@
 // adicionar um objeto Ex.: Request, que tenha um objeto Patient, e um objeto anamnese
-export interface RequestModel{
+export interface RequestModel {
   patient: Patient
   anamnese: Anamnese;
 }
 
-export interface Patient{
+export interface Patient {
   patientForm: PatientFormData;
 }
 
-export interface Anamnese{
+export interface Anamnese {
   pregnancyForm: PregnancyFormData;
   nutritionForm: NutritionFormData;
   sleepForm: SleepFormData;
@@ -23,8 +23,8 @@ export interface PatientFormData {
   age?: string;
   phone?: string;
   career?: string;
-  addresses: Address[]; 
-  siblings: Sibling[]; 
+  addresses: Address[];
+  siblings: Sibling[];
 }
 export interface Address {
   street?: string;  // adicionar db
@@ -42,11 +42,11 @@ export interface Sibling {
 export interface PregnancyFormData {
   gestationDuration?: string;
   motherAge?: string;
-  prenatalTreatment?: boolean; 
+  prenatalTreatment?: boolean;
   accidents?: string; // mudar para string no db
   diseasesDuringPregnancy?: string; //mudar para string no db
-  medicationsDuringPregnancy?: string ; // mudar para string no db
-  hypotension?: boolean ;  
+  medicationsDuringPregnancy?: string; // mudar para string no db
+  hypotension?: boolean;
   hypertension?: boolean;
   anemia?: boolean;
   deliveryDuration?: string;
@@ -59,13 +59,13 @@ export interface PregnancyFormData {
   cried?: boolean;
   cyanosis?: boolean;
   observations?: string;
-  
+
 }
 
-export interface NutritionFormData{
+export interface NutritionFormData {
   breastfeeding?: boolean;
   breastfeedingDuration?: string;
-  artificialFeeding?: boolean; 
+  artificialFeeding?: boolean;
   artificialFeedingDuration?: string;
   goodSuctionSwallowing?: boolean;
   choking?: boolean;
@@ -75,7 +75,7 @@ export interface NutritionFormData{
   observations?: string;
 }
 
-export interface SleepFormData{
+export interface SleepFormData {
   normal?: boolean;
   restless?: boolean;
   talksDuringSleep?: boolean;
@@ -87,7 +87,7 @@ export interface SleepFormData{
   observations?: string;
 }
 
-export interface PsychomotorDevelopmentFormData{
+export interface PsychomotorDevelopmentFormData {
   heldHeadUp?: string;
   crawled?: boolean;
   crawledAge?: string;
@@ -97,10 +97,10 @@ export interface PsychomotorDevelopmentFormData{
   grabbedObjectsAge?: string;
   canJump?: boolean; // adicionar no db
   walkingDefects?: string;
-  goodDirectionSense?:string; //mudar no db
-  sphincterControl? : boolean;
+  goodDirectionSense?: string; //mudar no db
+  sphincterControl?: boolean;
   bumpsIntoThings?: boolean;
-  dropsThingsFromHands?:boolean
+  dropsThingsFromHands?: boolean
   agile?: boolean;
   orthopedicProblems?: boolean;
   usedBoots?: boolean;
@@ -109,7 +109,7 @@ export interface PsychomotorDevelopmentFormData{
 
 }
 
-export interface LanguageDevelopmentFormData{
+export interface LanguageDevelopmentFormData {
   babbled?: string;
   syllableRepetition?: string; //mudar no db
   wordsWithMeaning?: string; //mudar no db
@@ -126,7 +126,7 @@ export interface LanguageDevelopmentFormData{
 
 }
 
-export interface PhatologicalHistoryFormData{
+export interface PhatologicalHistoryFormData {
   physicalMalformations?: boolean;
   measles?: boolean;
   smallpox?: boolean;
@@ -153,7 +153,7 @@ export interface PhatologicalHistoryFormData{
   observations?: string;
 }
 
-export interface IndependenceComprehensionFormData{
+export interface IndependenceComprehensionFormData {
   startedEatingAloneAge?: string;
   startedDressingAloneAge?: string;
   startedBathingAloneAge?: string;
@@ -161,35 +161,35 @@ export interface IndependenceComprehensionFormData{
   observations?: string;
 }
 
-export interface SchoolHistoryFormData{
+export interface SchoolHistoryFormData {
   doesWellSchool?: boolean;
   likesStudy?: boolean;
   parentsStudyChild?: boolean;
   arithmeticDifficulties?: boolean;
   writingDifficulties?: boolean;
   hasBeenHeldBack?: boolean;
-  reasoBeingHeldBack?:string;
-  attendedKindergarten?:boolean
-  kindergartenAge?:string;
-  changedSchoolsOften?:boolean;
-  currentGrade?:string;
-  currentSchool?:string;
-  observations?:string;
+  reasoBeingHeldBack?: string;
+  attendedKindergarten?: boolean
+  kindergartenAge?: string;
+  changedSchoolsOften?: boolean;
+  currentGrade?: string;
+  currentSchool?: string;
+  observations?: string;
 
 }
 
-export interface RecreationFormData{
+export interface RecreationFormData {
   favoriteActivitiesAndToys?: string;
   adaptsHasFriends?: boolean;
   favoriteBooksAndTvShows?: string;
   observations?: string;
 }
 
-export interface FamilyInterrelationFormData{
+export interface FamilyInterrelationFormData {
   relationshipFather?: string;
   relationshipMother?: string;
   relationshipSiblings?: string;
-  relationshisOther?: string;
+  relationshipOthers?: string;
   observations?: string;
 }
 

@@ -21,15 +21,15 @@ export const FamilyInterrelationForm: React.FC = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <FormGroup type="text" name="relationshipFather" placeholder="Relação com o pai" value={familyInterrelationFormData.relationshipFather || ""} onChange={(e) => setFamilyInterrelationField("relationshipFather", e.target.value)} />
-            
+
             <FormGroup type="text" name="relationshipMother" placeholder="Relação com a mãe" value={familyInterrelationFormData.relationshipMother || ""} onChange={(e) => setFamilyInterrelationField("relationshipMother", e.target.value)} />
-            
+
             <FormGroup type="text" name="relationshipSiblings" placeholder="Relação com os irmãos" value={familyInterrelationFormData.relationshipSiblings || ""} onChange={(e) => setFamilyInterrelationField("relationshipSiblings", e.target.value)} />
-            
-            <FormGroup type="text" name="relationshisOther" placeholder="Relação com outras pessoas" value={familyInterrelationFormData.relationshisOther || ""} onChange={(e) => setFamilyInterrelationField("relationshisOther", e.target.value)} />
-            
+
+            <FormGroup type="text" name="relationshipOthers" placeholder="Relação com outras pessoas" value={familyInterrelationFormData.relationshipOthers || ""} onChange={(e) => setFamilyInterrelationField("relationshipOthers", e.target.value)} />
+
             <FormGroup type="text" name="observations" placeholder="Observações" value={familyInterrelationFormData.observations || ""} onChange={(e) => setFamilyInterrelationField("observations", e.target.value)} />
-            
+
             <div className={styles.buttonPagesContainer}>
                 <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
                 <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />

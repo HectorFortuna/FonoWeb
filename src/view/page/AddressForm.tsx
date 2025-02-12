@@ -30,8 +30,6 @@ export const AddressForm = () => {
         navigate("/");
     };
 
-
-
     return (
         <form onSubmit={handleSubmit}>
             {addresses.map((address, index) => (
