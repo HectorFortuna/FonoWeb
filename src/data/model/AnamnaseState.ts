@@ -1,3 +1,5 @@
+import { IndependenceComprehension } from "view/page/IndependenceComprehensionFormData";
+
 // adicionar um objeto Ex.: Request, que tenha um objeto Patient, e um objeto anamnese
 export interface RequestModel {
   patient: Patient
@@ -12,6 +14,14 @@ export interface Anamnese {
   pregnancyForm: PregnancyFormData;
   nutritionForm: NutritionFormData;
   sleepForm: SleepFormData;
+  psychmotorDevelopmentForm: PsychomotorDevelopmentFormData;
+  languageDevelopment: LanguageDevelopmentFormData;
+  phatologicalHistory: PhatologicalHistoryFormData;
+  independenceComprehension: IndependenceComprehensionFormData;
+  schoolHistory: SchoolHistoryFormData;
+  recreation: RecreationFormData;
+  familyInterrelation: FamilyInterrelationFormData;
+
 }
 
 export interface PatientFormData {

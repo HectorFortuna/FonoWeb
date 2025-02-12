@@ -4,22 +4,18 @@ import { Button } from "../components/atoms/button/Button";
 import { useFormStore } from "../../states/ZustandCache";
 import { useNavigate } from "react-router-dom";
 import styles from "./style/Form.module.css";
+import { submitForm } from "data/network/AnamneseService";
 
 export const FamilyInterrelationForm: React.FC = () => {
     const { familyInterrelationFormData, setFamilyInterrelationField } = useFormStore();
     const navigate = useNavigate();
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        navigate("/next-form");
-    };
 
     const handleBack = () => {
         navigate("/recreation-form");
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={submitForm}>
             <FormGroup type="text" name="relationshipFather" placeholder="Relação com o pai" value={familyInterrelationFormData.relationshipFather || ""} onChange={(e) => setFamilyInterrelationField("relationshipFather", e.target.value)} />
 
             <FormGroup type="text" name="relationshipMother" placeholder="Relação com a mãe" value={familyInterrelationFormData.relationshipMother || ""} onChange={(e) => setFamilyInterrelationField("relationshipMother", e.target.value)} />
@@ -32,7 +28,7 @@ export const FamilyInterrelationForm: React.FC = () => {
 
             <div className={styles.buttonPagesContainer}>
                 <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
-                <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
+                <Button label="Enviar" type="submit" className={styles.buttonAction} variant="primary" />
             </div>
         </form>
     );

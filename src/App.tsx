@@ -19,25 +19,25 @@ import { FamilyInterrelationForm } from "view/page/FamilyInterrelationFormData";
 const App: React.FC = () => {
   const { clearAllForm } = useFormStore();
 
-  useEffect(() => {
-    localStorage.removeItem("multi-step-form");
-    clearAllForm();
+  // useEffect(() => {
+  //   localStorage.removeItem("multi-step-form");
+  //   clearAllForm();
 
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (window.confirm("Tem certeza que deseja sair? Seus dados serão perdidos.")) {
-        localStorage.removeItem("multi-step-form")
-        clearAllForm();
-        return true;
-      } else {
-        event.preventDefault();
-        return false;
-      }
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [clearAllForm]);
+  //   const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+  //     if (window.confirm("Tem certeza que deseja sair? Seus dados serão perdidos.")) {
+  //       localStorage.removeItem("multi-step-form")
+  //       clearAllForm();
+  //       return true;
+  //     } else {
+  //       event.preventDefault();
+  //       return false;
+  //     }
+  //   };
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [clearAllForm]);
 
   return (
     <Router>
