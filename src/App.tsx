@@ -13,6 +13,8 @@ import { IndependenceComprehension } from "view/page/IndependenceComprehensionFo
 import { SchoolHistory } from "view/page/SchoolHistoryFormData";
 import { RecreationForm } from "view/page/RecreationFormData";
 import { FamilyInterrelationForm } from "view/page/FamilyInterrelationFormData";
+import { HabitsAndTicksFormData } from "data/model/AnamnaseState";
+import { HabitsAndTicks } from "view/page/HabitsAndTicksForm";
 
 
 
@@ -52,7 +54,8 @@ const App: React.FC = () => {
         <Route path="/phatological-history-form" element={<PhatologicalHistory />} />
         <Route path="/independence-form" element={<IndependenceComprehension />} />
         <Route path="/school-history-form" element={<SchoolHistory />} />
-        <Route path="/recreation-form" element={<RecreationForm />} />
+        <Route path="/recreation-form" element={<RecreationForm />} /> 
+        <Route path="/habits-and-ticks-form" element={<HabitsAndTicks />} />
         <Route path="/family-interrelation-form" element={<FamilyInterrelationForm />} />
       </Routes>
     </Router>

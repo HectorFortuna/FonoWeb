@@ -30,24 +30,24 @@ export interface PatientFormData {
   fatherName?: string;
   motherName?: string;
   birthDate?: string;
-  age?: string;
-  phone?: string;
+  patientAge?: string;
+  phoneNumber?: string;
   career?: string;
-  addresses: Address[];
+  address: Address[];
   siblings: Sibling[];
 }
 export interface Address {
-  street?: string;  // adicionar db
-  number?: string;  // adicionar db
-  neighborhood?: string;  // adicionar db
-  city?: string;  // adicionar db
-  state?: string; // adicionar db
-  cep?: string; // adicionar db
+  street?: string;  
+  number?: string;  
+  neighborhood?: string;  
+  city?: string;  
+  state?: string; 
+  cep?: string; 
 }
 
 export interface Sibling {
-  name?: string;
-  age?: string;
+  siblingsName?: string;
+  siblingsAge?: string;
 }
 export interface PregnancyFormData {
   gestationDuration?: string;
@@ -163,6 +163,18 @@ export interface PhatologicalHistoryFormData {
   observations?: string;
 }
 
+export interface HabitsAndTicksFormData{
+  usedPacifier?: string;
+  pacifierRemovalMethod?: string;
+  suckedThumb?: boolean;
+  thumbHand?: string;
+  thumbSuckingDuration?: string;
+  thumbSuckingRemovalMethod?: string;
+  bitesNails?: boolean;
+  nailBitingHand?: string;
+  observations?: string;
+}
+
 export interface IndependenceComprehensionFormData {
   startedEatingAloneAge?: string;
   startedDressingAloneAge?: string;
@@ -215,6 +227,9 @@ export interface StoreState {
   schoolHistoryFormData: SchoolHistoryFormData;
   recreationFormData: RecreationFormData;
   familyInterrelationFormData: FamilyInterrelationFormData;
+  habitsAndTicksFormData: HabitsAndTicksFormData;
+  mainComplaint: string;
+  evaluationData: string;
 
 
 
@@ -229,9 +244,11 @@ export interface StoreState {
   setSchoolHistoryField: (field: keyof SchoolHistoryFormData, value: string | boolean) => void;
   setRecreationField: (field: keyof RecreationFormData, value: string | boolean) => void;
   setFamilyInterrelationField: (field: keyof FamilyInterrelationFormData, value: string | boolean) => void;
+  setHabitsAndTicksField: (field: keyof HabitsAndTicksFormData, value: string | boolean) => void;
+  setMainComplaint: (value: string) => void;
+  setEvaluationData: (value: string) => void;
 
-
-  setAddress: (index: number, field: keyof PatientFormData["addresses"][number], value: string) => void;
+  setAddress: (index: number, field: keyof PatientFormData["address"][number], value: string) => void;
   addAddress: () => void;
   removeAddress: (index: number) => void;
 

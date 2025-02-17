@@ -6,11 +6,11 @@ export const initialFormData = {
     fatherName: "",
     motherName: "",
     birthDate: "",
-    age: "",
-    phone: "",
+    patientAge: "",
+    phoneNumber: "",
     career: "",
-    addresses: [{ street: "", number: "", neighborhood: "", city: "", state: "", cep: "" }],
-    siblings: [{ name: "", age: "" }],
+    address: [{ street: "", number: "", neighborhood: "", city: "", state: "", cep: "" }],
+    siblings: [{ siblingsName: "", siblingsAge: "" }],
   };
   
   export const initialPregnancyFormData = {
@@ -162,4 +162,14 @@ export const initialFormData = {
     relationshipOthers: "",
     observations: "",
   }
-  
+   export const initialHabitsAndTicksFormData = {
+    usedPacifier: "",
+    pacifierRemovalMethod: "",
+    suckedThumb: false,
+    thumbHand: "",
+    thumbSuckingDuration: "",
+    thumbSuckingRemovalMethod: "",
+    bitesNails: false,
+    nailBitingHand: "",
+    observations: "",
+   }

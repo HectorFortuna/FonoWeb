@@ -1,13 +1,19 @@
 import { StoreState} from "data/model/AnamnaseState"; 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { initialFormData, initialNutritionFormData, initialPregnancyFormData, initialSleepFormData, initialPsychomotorFormData, initialFamilyInterrelationshipFormData, initialIndependenceComprehensionFormData, initialLanguageFormData, initialPhatologicalHistoryFormData, initialRecreationFormData, initialSchoolHistoryFormData } from "../data/utils/initialState";
+import { initialFormData, initialNutritionFormData, initialPregnancyFormData, initialSleepFormData, initialPsychomotorFormData, initialFamilyInterrelationshipFormData, initialIndependenceComprehensionFormData, initialLanguageFormData, initialPhatologicalHistoryFormData, initialRecreationFormData, initialSchoolHistoryFormData, initialHabitsAndTicksFormData } from "../data/utils/initialState";
 
 export const useFormStore = create<StoreState>()(
   persist(
     (set, get) => ({
       
-    formData: {...initialFormData,},
+        formData: { 
+            ...initialFormData,
+            address: initialFormData.address || [],
+            siblings: initialFormData.siblings || [] 
+          },
+          
+          
     pregnancyFormData: {...initialPregnancyFormData,},
     nutritionFormData: {...initialNutritionFormData},
     sleepFormData: {...initialSleepFormData},
@@ -18,6 +24,9 @@ export const useFormStore = create<StoreState>()(
     schoolHistoryFormData: {...initialSchoolHistoryFormData},
     recreationFormData: {...initialRecreationFormData},
     familyInterrelationFormData: {...initialFamilyInterrelationshipFormData},
+    mainComplaint: "",
+    evaluationData: new Date().toISOString().split("T")[0],
+    habitsAndTicksFormData: {...initialHabitsAndTicksFormData},
 
     
     setField: (field, value) =>
@@ -105,27 +114,49 @@ export const useFormStore = create<StoreState>()(
             },
     })),
 
+    setHabitsAndTicksField: (field, value) =>
+        set((state) => ({
+            habitsAndTicksFormData: {
+                ...state.habitsAndTicksFormData,
+                [field]: value,
+            },
+    })),
+    
+    setEvaluationData: (value) =>
+        set(() => ({ evaluationData: value })),
+
+    setMainComplaint: (value) =>
+        set(() => ({ mainComplaint: value })),
+
     setAddress: (index, field, value) =>
         set((state) => {
-            const addresses = [...state.formData.addresses];
-            addresses[index] = { ...addresses[index], [field]: value };
-            return { formData: { ...state.formData, addresses } };
+            const addresses = Array.isArray(state.formData.address) 
+                ? [...state.formData.address] 
+                : []; // ✅ Se `address` não for array, cria um array vazio
+    
+            addresses[index] = { 
+                ...(addresses[index] || {}), // ✅ Evita erro se `addresses[index]` for `undefined`
+                [field]: value 
+            };
+    
+            return { formData: { ...state.formData, address: addresses } };
     }),
-
+    
     addAddress: () =>
         set((state) => ({
             formData: {
                 ...state.formData,
-                addresses: [
-                ...state.formData.addresses,
-                { street: "", number: "", neighborhood: "", city: "", state: "", cep: "" },
-            ],
-          },
+                address: [
+                    ...(Array.isArray(state.formData.address) ? state.formData.address : []), // ✅ Garante que é um array
+                    { street: "", number: "", neighborhood: "", city: "", state: "", cep: "" },
+                ],
+            },
     })),
+    
 
     removeAddress: (index) =>
         set((state) => {
-            const addresses = [...state.formData.addresses];
+            const addresses = [...state.formData.address];
             if (addresses.length > 1) {
                 addresses.splice(index, 1);
             }
@@ -136,7 +167,7 @@ export const useFormStore = create<StoreState>()(
         set((state) => {
             const siblings = [...(state.formData.siblings || [])];
             if (!siblings[index]) {
-                siblings[index] = { name: "", age: "" };
+                siblings[index] = { siblingsName: "", siblingsAge: "" };
             }
             siblings[index][field] = value;
             return { formData: { ...state.formData, siblings } };
@@ -148,7 +179,7 @@ export const useFormStore = create<StoreState>()(
                 ...state.formData,
                 siblings: [
                 ...(state.formData.siblings || []),
-                { name: "", age: "" },
+                { siblingsName: "", siblingsAge: "" },
             ],
         },
     })),

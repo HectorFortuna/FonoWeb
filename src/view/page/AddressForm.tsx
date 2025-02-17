@@ -16,8 +16,8 @@ export const AddressForm = () => {
         setForceUpdate(prev => prev + 1);
     };
 
-    const addresses = formData.addresses && formData.addresses.length > 0
-        ? formData.addresses
+    const addresses = formData.address && formData.address.length > 0
+        ? formData.address
         : [{ street: "", number: "", neighborhood: "", city: "", state: "", cep: "" }];
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

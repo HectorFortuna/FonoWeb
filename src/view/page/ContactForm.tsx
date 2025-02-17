@@ -6,7 +6,7 @@ import { Form, useNavigate } from "react-router-dom";
 import styles from "./style/Form.module.css";
 
 export const ContactForm: React.FC = () => {
-  const { formData, setField, setSibling, addSibling, removeSiblings } = useFormStore();
+  const { formData, setField, setSibling, addSibling, removeSiblings, mainComplaint, evaluationData, setMainComplaint, setEvaluationData } = useFormStore();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +22,11 @@ export const ContactForm: React.FC = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+
+      <FormGroup type="text" name="mainComplaint" placeholder="Queixa Principal" value={mainComplaint || ""} onChange={(e) => setMainComplaint(e.target.value as string)} />
+      <label htmlFor="evaluationData">Data da Avaliação</label>
+      <FormGroup type="date" name="evaluationData" placeholder="Data da Avaliação" value={evaluationData || ""} onChange={(e) => setEvaluationData(e.target.value)} />
+
       <FormGroup
         type="text"
         name="patientName"
@@ -64,16 +69,16 @@ export const ContactForm: React.FC = () => {
         type="number"
         name="age"
         placeholder="Idade"
-        value={formData.age || ""}
-        onChange={(e) => setField("age", e.target.value)}
+        value={formData.patientAge || ""}
+        onChange={(e) => setField("patientAge", e.target.value)}
       />
 
       <FormGroup
         type="tel"
         name="phone"
         placeholder="Telefone"
-        value={formData.phone || ""}
-        onChange={(e) => setField("phone", e.target.value)}
+        value={formData.phoneNumber || ""}
+        onChange={(e) => setField("phoneNumber", e.target.value)}
 
       />
       <FormGroup
@@ -90,15 +95,15 @@ export const ContactForm: React.FC = () => {
             type="text"
             name={`siblingName-${index}`}
             placeholder="Nome do Irmão"
-            value={sibling.name || ""}
-            onChange={(e) => setSibling(index, "name", e.target.value)}
+            value={sibling.siblingsName || ""}
+            onChange={(e) => setSibling(index, "siblingsName", e.target.value)}
           />
           <FormGroup
             type="number"
             name={`siblingAge-${index}`}
             placeholder="Idade do Irmão"
-            value={sibling.age || ""}
-            onChange={(e) => setSibling(index, "age", e.target.value)}
+            value={sibling.siblingsAge || ""}
+            onChange={(e) => setSibling(index, "siblingsAge", e.target.value)}
           />
         </div>
       ))}

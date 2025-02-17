@@ -12,7 +12,7 @@ export const RecreationForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/family-interrelation-form");
+        navigate("/habits-and-ticks-form");
     };
 
     const handleBack = () => {
