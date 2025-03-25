@@ -1,128 +1,230 @@
-import React from "react";
-import { FormGroup } from "../components/molecules/form_groups/FormGroup";
-import { Button } from "../components/atoms/button/Button";
+import React, { useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { useFormStore } from "../../states/ZustandCache";
-import { Form, useNavigate } from "react-router-dom";
-import styles from "./style/Form.module.css";
 
 export const ContactForm: React.FC = () => {
-  const { formData, setField, setSibling, addSibling, removeSiblings, mainComplaint, evaluationData, setMainComplaint, setEvaluationData } = useFormStore();
+  const { formData, mainComplaint, evaluationData, setField, setMainComplaint, setEvaluationData, setSibling, addSibling, removeSiblings } = useFormStore();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Dados do formulário:", formData);
-    navigate("/address-form");
+    navigate("endereco");
   };
 
-  const siblings = formData.siblings && formData.siblings.length > 0
-    ? formData.siblings
-    : [{ name: "", age: "" }];
-
-
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-
-      <FormGroup type="text" name="mainComplaint" placeholder="Queixa Principal" value={mainComplaint || ""} onChange={(e) => setMainComplaint(e.target.value as string)} />
-      <label htmlFor="evaluationData">Data da Avaliação</label>
-      <FormGroup type="date" name="evaluationData" placeholder="Data da Avaliação" value={evaluationData || ""} onChange={(e) => setEvaluationData(e.target.value)} />
-
-      <FormGroup
-        type="text"
-        name="patientName"
-        placeholder="Nome do Paciente"
-        value={formData.patientName || ""}
-        onChange={(e) => setField("patientName", e.target.value)}
-        required
-      />
-      <FormGroup
-        type="text"
-        name="school"
-        placeholder="Escola"
-        value={formData.school || ""}
-        onChange={(e) => setField("school", e.target.value)}
-      />
-      <FormGroup
-        type="text"
-        name="fatherName"
-        placeholder="Nome do Pai"
-        value={formData.fatherName || ""}
-        onChange={(e) => setField("fatherName", e.target.value)}
-      />
-      <FormGroup
-        type="text"
-        name="motherName"
-        placeholder="Nome da Mãe"
-        value={formData.motherName || ""}
-        onChange={(e) => setField("motherName", e.target.value)}
-      />
-
-      <FormGroup
-        type="date"
-        name="birthDate"
-        placeholder="Data de Nascimento"
-        value={formData.birthDate || ""}
-        onChange={(e) => setField("birthDate", e.target.value)}
-      />
-
-      <FormGroup
-        type="number"
-        name="age"
-        placeholder="Idade"
-        value={formData.patientAge || ""}
-        onChange={(e) => setField("patientAge", e.target.value)}
-      />
-
-      <FormGroup
-        type="tel"
-        name="phone"
-        placeholder="Telefone"
-        value={formData.phoneNumber || ""}
-        onChange={(e) => setField("phoneNumber", e.target.value)}
-
-      />
-      <FormGroup
-        type="text"
-        name="career"
-        placeholder="Profissão"
-        value={formData.career || ""}
-        onChange={(e) => setField("career", e.target.value)}
-      />
-      {/* Campos de Irmãos */}
-      {formData.siblings?.map((sibling, index) => (
-        <div key={index} className={styles.siblingContainer}>
-          <FormGroup
-            type="text"
-            name={`siblingName-${index}`}
-            placeholder="Nome do Irmão"
-            value={sibling.siblingsName || ""}
-            onChange={(e) => setSibling(index, "siblingsName", e.target.value)}
-          />
-          <FormGroup
-            type="number"
-            name={`siblingAge-${index}`}
-            placeholder="Idade do Irmão"
-            value={sibling.siblingsAge || ""}
-            onChange={(e) => setSibling(index, "siblingsAge", e.target.value)}
-          />
-        </div>
-      ))}
-
-      <div className={styles.buttonContainer}>
-        <Button
-          label="Remover Irmão"
-          onClick={() => removeSiblings(siblings.length - 1)}
-          className={styles.buttonRemove}
-          variant="danger"
-          disabled={siblings.length <= 1}
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: 600,
+        margin: "40px auto",   // espaçamento vertical
+        padding: 3,           // padding interno
+        backgroundColor: "#FAFAFA",
+        border: "1px solid #E0E0E0",
+        borderRadius: 2,
+        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,               // espaço entre os elementos filhos
+      }}
+    >
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          width: "100%",
+        }}
+      >
+        {/* Queixa Principal */}
+        <TextField
+          label="Queixa Principal"
+          variant="outlined"
+          value={mainComplaint}
+          onChange={(e) => setMainComplaint(e.target.value)}
+          fullWidth
         />
 
-        <Button label="Adicionar Irmão" onClick={addSibling} className={styles.buttonAction} variant="secondary" />
-      </div>
+        {/* Data da Avaliação */}
+        <TextField
+          label="Data da Avaliação"
+          variant="outlined"
+          type="date"
+          value={evaluationData}
+          onChange={(e) => setEvaluationData(e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          fullWidth
+        />
 
-      <div className={styles.buttonContainer}>
-        <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
-      </div>
-    </form>
+        {/* Nome do Paciente */}
+        <TextField
+          label="Nome do Paciente"
+          variant="outlined"
+          value={formData.patientName}
+          onChange={(e) => setField("patientName", e.target.value)}
+          fullWidth
+          required
+        />
+
+        {/* Escola */}
+        <TextField
+          label="Escola"
+          variant="outlined"
+          value={formData.school}
+          onChange={(e) => setField("school", e.target.value)}
+          fullWidth
+        />
+
+        {/* Pai */}
+        <TextField
+          label="Nome do Pai"
+          variant="outlined"
+          value={formData.fatherName}
+          onChange={(e) => setField("fatherName", e.target.value)}
+          fullWidth
+        />
+
+        {/* Mãe */}
+        <TextField
+          label="Nome da Mãe"
+          variant="outlined"
+          value={formData.motherName}
+          onChange={(e) => setField("motherName", e.target.value)}
+          fullWidth
+        />
+
+        {/* Data de Nascimento */}
+        <TextField
+          label="Data de Nascimento"
+          type="date"
+          value={formData.birthDate}
+          onChange={(e) => setField("birthDate", e.target.value)}
+          InputLabelProps={{ shrink: true }}
+          variant="outlined"
+          fullWidth
+        />
+
+        {/* Idade */}
+        <TextField
+          label="Idade"
+          type="number"
+          variant="outlined"
+          value={formData.patientAge}
+          onChange={(e) => setField("patientAge", e.target.value)}
+          fullWidth
+        />
+
+        {/* Telefone */}
+        <TextField
+          label="Telefone"
+          type="tel"
+          variant="outlined"
+          value={formData.phoneNumber}
+          onChange={(e) => setField("phoneNumber", e.target.value)}
+          fullWidth
+        />
+
+        {/* Profissão */}
+        <TextField
+          label="Profissão"
+          variant="outlined"
+          value={formData.career}
+          onChange={(e) => setField("career", e.target.value)}
+          fullWidth
+        />
+
+        {/* Campos de Irmãos */}
+        {formData.siblings.map((sibling: any, index: number) => (
+          <Box
+            key={index}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #E0E0E0",
+              borderRadius: 1,
+              padding: 2,
+            }}
+          >
+            <TextField
+              label="Nome do Irmão"
+              variant="outlined"
+              value={sibling.siblingsName}
+              onChange={(e) => setSibling(index, "siblingsName", e.target.value)}
+              fullWidth
+            />
+            <TextField
+              label="Idade do Irmão"
+              type="number"
+              variant="outlined"
+              value={sibling.siblingsAge}
+              onChange={(e) => setSibling(index, "siblingsAge", e.target.value)}
+              fullWidth
+            />
+          </Box>
+        ))}
+
+        {/* Botões para irmãos */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            gap: 2,
+            width: "100%",
+            marginTop: 1,
+          }}
+        >
+          {/* Remover Irmão */}
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => removeSiblings(formData.siblings.length - 1)}
+            disabled={formData.siblings.length <= 1}
+          >
+            Remover Irmão
+          </Button>
+
+          {/* Adicionar Irmão */}
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={addSibling}
+          >
+            Adicionar Irmão
+          </Button>
+        </Box>
+
+        {/* Botões: Sair / Avançar */}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+            marginTop: 2,
+          }}
+        >
+          <Button
+            variant="outlined"
+            color="error"
+            onClick={() => navigate("/")}
+          >
+            Sair
+          </Button>
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Avançar
+          </Button>
+        </Box>
+
+      </Box>
+    </Box>
   );
 };

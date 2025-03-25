@@ -37,12 +37,12 @@ export interface PatientFormData {
   siblings: Sibling[];
 }
 export interface Address {
-  street?: string;  
-  number?: string;  
-  neighborhood?: string;  
-  city?: string;  
-  state?: string; 
-  cep?: string; 
+  street?: string;
+  number?: string;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
+  cep?: string;
 }
 
 export interface Sibling {
@@ -163,7 +163,7 @@ export interface PhatologicalHistoryFormData {
   observations?: string;
 }
 
-export interface HabitsAndTicksFormData{
+export interface HabitsAndTicksFormData {
   usedPacifier?: string;
   pacifierRemovalMethod?: string;
   suckedThumb?: boolean;

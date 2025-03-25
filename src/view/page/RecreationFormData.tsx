@@ -1,10 +1,13 @@
 import React from "react";
-import { FormGroup } from "../components/molecules/form_groups/FormGroup";
-import { Button } from "../components/atoms/button/Button";
+import {
+    Box,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Button,
+} from "@mui/material";
 import { useFormStore } from "../../states/ZustandCache";
 import { useNavigate } from "react-router-dom";
-import styles from "./style/Form.module.css";
-import { CheckboxGroup } from "view/components/molecules/checkbox/CheckboxGroup";
 
 export const RecreationForm: React.FC = () => {
     const { recreationFormData, setRecreationField } = useFormStore();
@@ -12,31 +15,82 @@ export const RecreationForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/habits-and-ticks-form");
+        navigate("/pacientes/novo/habitos-e-tiques");
     };
 
     const handleBack = () => {
-        navigate("/school-history-form");
+        navigate("/pacientes/novo/historico-escolar");
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <FormGroup type="text" name="favoriteActivitiesAndToys" placeholder="Atividades e brinquedos favoritos" value={recreationFormData.favoriteActivitiesAndToys || ""} onChange={(e) => setRecreationField("favoriteActivitiesAndToys", e.target.value)} />
-            <CheckboxGroup
-                name="adaptsHasFriends"
-                label="Tem amigos"
-                checked={recreationFormData.adaptsHasFriends || false}
-                onChange={(e) => setRecreationField("adaptsHasFriends", e.target.checked)}
+        <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+                backgroundColor: "#FAFAFA",
+                border: "1px solid #E0E0E0",
+                borderRadius: 2,
+                p: 3,
+                boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                maxWidth: 600,
+                margin: "40px auto",
+            }}
+        >
+            <TextField
+                label="Atividades e brinquedos favoritos"
+                variant="outlined"
+                fullWidth
+                value={recreationFormData.favoriteActivitiesAndToys || ""}
+                onChange={(e) =>
+                    setRecreationField("favoriteActivitiesAndToys", e.target.value)
+                }
             />
 
-            <FormGroup type="text" name="favoriteBooksAndTvShows" placeholder="Livros e programas de TV favoritos" value={recreationFormData.favoriteBooksAndTvShows || ""} onChange={(e) => setRecreationField("favoriteBooksAndTvShows", e.target.value)} />
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={recreationFormData.adaptsHasFriends || false}
+                        onChange={(e) =>
+                            setRecreationField("adaptsHasFriends", e.target.checked)
+                        }
+                    />
+                }
+                label="Tem amigos"
+            />
 
-            <FormGroup type="text" name="observations" placeholder="Observações" value={recreationFormData.observations || ""} onChange={(e) => setRecreationField("observations", e.target.value)} />
+            <TextField
+                label="Livros e programas de TV favoritos"
+                variant="outlined"
+                fullWidth
+                value={recreationFormData.favoriteBooksAndTvShows || ""}
+                onChange={(e) =>
+                    setRecreationField("favoriteBooksAndTvShows", e.target.value)
+                }
+            />
 
-            <div className={styles.buttonPagesContainer}>
-                <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
-                <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
-            </div>
-        </form>
+            <TextField
+                label="Observações"
+                variant="outlined"
+                fullWidth
+                multiline
+                minRows={3}
+                value={recreationFormData.observations || ""}
+                onChange={(e) =>
+                    setRecreationField("observations", e.target.value)
+                }
+            />
+
+            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                <Button variant="outlined" color="primary" onClick={handleBack}>
+                    Voltar
+                </Button>
+                <Button type="submit" variant="contained" color="primary">
+                    Avançar
+                </Button>
+            </Box>
+        </Box>
     );
 };

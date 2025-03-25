@@ -1,29 +1,31 @@
 import React from "react";
-import { FormGroup } from "../components/molecules/form_groups/FormGroup";
-import { Button } from "../components/atoms/button/Button";
+import {
+    Box,
+    TextField,
+    Button,
+} from "@mui/material";
 import { useFormStore } from "../../states/ZustandCache";
 import { useNavigate } from "react-router-dom";
-import styles from "./style/Form.module.css";
 import { submitForm } from "data/network/AnamneseService";
 
 export const FamilyInterrelationForm: React.FC = () => {
     const {
         familyInterrelationFormData,
         setFamilyInterrelationField,
-       
     } = useFormStore();
+
     const navigate = useNavigate();
 
     const handleBack = () => {
-        navigate("/habits-and-ticks-form");
+        navigate("/pacientes/novo/habitos-e-tiques");
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("📡 Enviando dados...");
-        
+
         try {
-            await submitForm();
+            await submitForm(); // aqui você pode passar os dados se necessário
             console.log("✅ Formulário enviado com sucesso!");
         } catch (error) {
             console.error("❌ Erro ao enviar:", error);
@@ -31,23 +33,82 @@ export const FamilyInterrelationForm: React.FC = () => {
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <FormGroup type="text" name="relationshipFather" placeholder="Relação com o pai" value={familyInterrelationFormData.relationshipFather || ""} onChange={(e) => setFamilyInterrelationField("relationshipFather", e.target.value)} />
-            
-            <FormGroup type="text" name="relationshipMother" placeholder="Relação com a mãe" value={familyInterrelationFormData.relationshipMother || ""} onChange={(e) => setFamilyInterrelationField("relationshipMother", e.target.value)} />
+        <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+                backgroundColor: "#FAFAFA",
+                border: "1px solid #E0E0E0",
+                borderRadius: 2,
+                p: 3,
+                boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                maxWidth: 600,
+                margin: "40px auto",
+            }}
+        >
+            <TextField
+                label="Relação com o pai"
+                fullWidth
+                variant="outlined"
+                value={familyInterrelationFormData.relationshipFather || ""}
+                onChange={(e) =>
+                    setFamilyInterrelationField("relationshipFather", e.target.value)
+                }
+            />
 
-            <FormGroup type="text" name="relationshipSiblings" placeholder="Relação com os irmãos" value={familyInterrelationFormData.relationshipSiblings || ""} onChange={(e) => setFamilyInterrelationField("relationshipSiblings", e.target.value)} />
+            <TextField
+                label="Relação com a mãe"
+                fullWidth
+                variant="outlined"
+                value={familyInterrelationFormData.relationshipMother || ""}
+                onChange={(e) =>
+                    setFamilyInterrelationField("relationshipMother", e.target.value)
+                }
+            />
 
-            <FormGroup type="text" name="relationshipOthers" placeholder="Relação com outras pessoas" value={familyInterrelationFormData.relationshipOthers || ""} onChange={(e) => setFamilyInterrelationField("relationshipOthers", e.target.value)} />
+            <TextField
+                label="Relação com os irmãos"
+                fullWidth
+                variant="outlined"
+                value={familyInterrelationFormData.relationshipSiblings || ""}
+                onChange={(e) =>
+                    setFamilyInterrelationField("relationshipSiblings", e.target.value)
+                }
+            />
 
-            <FormGroup type="text" name="observations" placeholder="Observações" value={familyInterrelationFormData.observations || ""} onChange={(e) => setFamilyInterrelationField("observations", e.target.value)} />
+            <TextField
+                label="Relação com outras pessoas"
+                fullWidth
+                variant="outlined"
+                value={familyInterrelationFormData.relationshipOthers || ""}
+                onChange={(e) =>
+                    setFamilyInterrelationField("relationshipOthers", e.target.value)
+                }
+            />
 
-           
-            <div className={styles.buttonPagesContainer}>
-                <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
-                <Button label="Enviar" type="submit" className={styles.buttonAction} variant="primary" />
-            </div>
-        </form>
+            <TextField
+                label="Observações"
+                fullWidth
+                variant="outlined"
+                multiline
+                minRows={3}
+                value={familyInterrelationFormData.observations || ""}
+                onChange={(e) =>
+                    setFamilyInterrelationField("observations", e.target.value)
+                }
+            />
+
+            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                <Button variant="outlined" color="primary" onClick={handleBack}>
+                    Voltar
+                </Button>
+                <Button type="submit" variant="contained" color="primary">
+                    Enviar
+                </Button>
+            </Box>
+        </Box>
     );
 };
-

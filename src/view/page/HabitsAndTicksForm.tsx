@@ -1,11 +1,13 @@
 import React from "react";
-import { FormGroup } from "../components/molecules/form_groups/FormGroup";
-import { Button } from "../components/atoms/button/Button";
+import {
+    Box,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Button,
+} from "@mui/material";
 import { useFormStore } from "../../states/ZustandCache";
-import { Form, useNavigate } from "react-router-dom";
-import styles from "./style/Form.module.css";
-import { CheckboxGroup } from "view/components/molecules/checkbox/CheckboxGroup";
-
+import { useNavigate } from "react-router-dom";
 
 export const HabitsAndTicks: React.FC = () => {
     const { habitsAndTicksFormData, setHabitsAndTicksField } = useFormStore();
@@ -13,31 +15,134 @@ export const HabitsAndTicks: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate("/family-interrelation-form");
+        navigate("/pacientes/novo/relacao-familiar");
     };
 
     const handleBack = () => {
-        navigate("/recreation-form");  
+        navigate("/pacientes/novo/recreacao");
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <Box
+            component="form"
+            onSubmit={handleSubmit}
+            sx={{
+                backgroundColor: "#FAFAFA",
+                border: "1px solid #E0E0E0",
+                borderRadius: 2,
+                p: 3,
+                boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                maxWidth: 600,
+                margin: "40px auto",
+            }}
+        >
+            <TextField
+                label="Usou chupeta?"
+                fullWidth
+                variant="outlined"
+                value={habitsAndTicksFormData.usedPacifier || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("usedPacifier", e.target.value)
+                }
+            />
 
-            <FormGroup type="text" name="habits" placeholder="Usou chupeta?" value={habitsAndTicksFormData.usedPacifier || ""} onChange={(e) => setHabitsAndTicksField("usedPacifier", e.target.value)} />
-            <FormGroup  type="text" name="habits" placeholder="Como a chupeta foi tirada?" value={habitsAndTicksFormData.pacifierRemovalMethod || ""} onChange={(e) => setHabitsAndTicksField("pacifierRemovalMethod", e.target.value)} />
-            <CheckboxGroup name="habits" label="Chupu dedo" checked={habitsAndTicksFormData.suckedThumb || false} onChange={(e) => setHabitsAndTicksField("suckedThumb", e.target.checked)} />
-            <FormGroup type="text" name="habits" placeholder="Qual mão?" value={habitsAndTicksFormData.thumbHand || ""} onChange={(e) => setHabitsAndTicksField("thumbHand", e.target.value)} />
-            <FormGroup type="text" name="habits" placeholder="Até quando chupou o dedo?" value={habitsAndTicksFormData.thumbSuckingDuration || ""} onChange={(e) => setHabitsAndTicksField("thumbSuckingDuration", e.target.value)} />
-            <FormGroup type="text" name="habits" placeholder="Como parou de chupar o dedo?" value={habitsAndTicksFormData.thumbSuckingRemovalMethod || ""} onChange={(e) => setHabitsAndTicksField("thumbSuckingRemovalMethod", e.target.value)} />
-            <CheckboxGroup name="habits" label="Roer unhas" checked={habitsAndTicksFormData.bitesNails || false} onChange={(e) => setHabitsAndTicksField("bitesNails", e.target.checked)} />
-            <FormGroup type="text" name="habits" placeholder="De qual mao?" value={habitsAndTicksFormData.nailBitingHand || ""} onChange={(e) => setHabitsAndTicksField("nailBitingHand", e.target.value)} />
-            <FormGroup type="text"name="habits"placeholder="Observações" value={habitsAndTicksFormData.observations || ""} onChange={(e) => setHabitsAndTicksField("observations", e.target.value)} />
-            <div className={styles.buttonPagesContainer}>
-                <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
-                <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
-            </div>
+            <TextField
+                label="Como a chupeta foi tirada?"
+                fullWidth
+                variant="outlined"
+                value={habitsAndTicksFormData.pacifierRemovalMethod || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("pacifierRemovalMethod", e.target.value)
+                }
+            />
 
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={habitsAndTicksFormData.suckedThumb || false}
+                        onChange={(e) =>
+                            setHabitsAndTicksField("suckedThumb", e.target.checked)
+                        }
+                    />
+                }
+                label="Chupou dedo"
+            />
 
-        </form>
-    )
+            <TextField
+                label="Qual mão?"
+                fullWidth
+                variant="outlined"
+                value={habitsAndTicksFormData.thumbHand || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("thumbHand", e.target.value)
+                }
+            />
+
+            <TextField
+                label="Até quando chupou o dedo?"
+                fullWidth
+                variant="outlined"
+                value={habitsAndTicksFormData.thumbSuckingDuration || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("thumbSuckingDuration", e.target.value)
+                }
+            />
+
+            <TextField
+                label="Como parou de chupar o dedo?"
+                fullWidth
+                variant="outlined"
+                value={habitsAndTicksFormData.thumbSuckingRemovalMethod || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("thumbSuckingRemovalMethod", e.target.value)
+                }
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={habitsAndTicksFormData.bitesNails || false}
+                        onChange={(e) =>
+                            setHabitsAndTicksField("bitesNails", e.target.checked)
+                        }
+                    />
+                }
+                label="Roe as unhas"
+            />
+
+            <TextField
+                label="De qual mão?"
+                fullWidth
+                variant="outlined"
+                value={habitsAndTicksFormData.nailBitingHand || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("nailBitingHand", e.target.value)
+                }
+            />
+
+            <TextField
+                label="Observações"
+                fullWidth
+                variant="outlined"
+                multiline
+                minRows={3}
+                value={habitsAndTicksFormData.observations || ""}
+                onChange={(e) =>
+                    setHabitsAndTicksField("observations", e.target.value)
+                }
+            />
+
+            <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                <Button variant="outlined" color="primary" onClick={handleBack}>
+                    Voltar
+                </Button>
+                <Button type="submit" variant="contained" color="primary">
+                    Avançar
+                </Button>
+            </Box>
+        </Box>
+    );
 };

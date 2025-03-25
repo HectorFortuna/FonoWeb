@@ -1,6 +1,5 @@
 import React from "react";
-import { FormGroup } from "../form_groups/FormGroup";
-import styles from "./AddressFormGroup.module.css";
+import { Box, TextField } from "@mui/material";
 
 interface Address {
   street?: string;
@@ -17,51 +16,65 @@ interface AddressFormGroupProps {
   onAddressChange: (index: number, field: keyof Address, value: string) => void;
 }
 
-export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({ index, address, onAddressChange }) => {
+export const AddressFormGroup: React.FC<AddressFormGroupProps> = ({
+  index,
+  address,
+  onAddressChange,
+}) => {
   return (
-    <div className={styles.addressContainer}>
-      <FormGroup
-        type="text"
-        name={`street-${index}`}
-        placeholder="Rua"
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #E0E0E0",
+        borderRadius: 1,
+        p: 2,
+      }}
+    >
+      <TextField
+        label="Rua"
+        variant="outlined"
         value={address.street ?? ""}
         onChange={(e) => onAddressChange(index, "street", e.target.value)}
+        fullWidth
       />
-      <FormGroup
-        type="text"
-        name={`number-${index}`}
-        placeholder="Número"
+      <TextField
+        label="Número"
+        variant="outlined"
         value={address.number ?? ""}
         onChange={(e) => onAddressChange(index, "number", e.target.value)}
+        fullWidth
       />
-      <FormGroup
-        type="text"
-        name={`neighborhood-${index}`}
-        placeholder="Bairro"
+      <TextField
+        label="Bairro"
+        variant="outlined"
         value={address.neighborhood ?? ""}
         onChange={(e) => onAddressChange(index, "neighborhood", e.target.value)}
+        fullWidth
       />
-      <FormGroup
-        type="text"
-        name={`city-${index}`}
-        placeholder="Cidade"
+      <TextField
+        label="Cidade"
+        variant="outlined"
         value={address.city ?? ""}
         onChange={(e) => onAddressChange(index, "city", e.target.value)}
+        fullWidth
       />
-      <FormGroup
-        type="text"
-        name={`state-${index}`}
-        placeholder="Estado"
+      <TextField
+        label="Estado"
+        variant="outlined"
         value={address.state ?? ""}
         onChange={(e) => onAddressChange(index, "state", e.target.value)}
+        fullWidth
       />
-      <FormGroup
-        type="text"
-        name={`cep-${index}`}
-        placeholder="CEP"
+      <TextField
+        label="CEP"
+        variant="outlined"
         value={address.cep ?? ""}
         onChange={(e) => onAddressChange(index, "cep", e.target.value)}
+        fullWidth
       />
-    </div>
+    </Box>
   );
 };

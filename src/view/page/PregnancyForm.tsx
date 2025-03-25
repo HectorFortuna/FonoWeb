@@ -1,115 +1,244 @@
 import React from "react";
-import { FormGroup } from "../components/molecules/form_groups/FormGroup";
-import { Button } from "../components/atoms/button/Button";
-import { useFormStore } from "../../states/ZustandCache";
+import {
+  Box,
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import styles from "./style/Form.module.css";
-import { CheckboxGroup } from "view/components/molecules/checkbox/CheckboxGroup";
+import { useFormStore } from "../../states/ZustandCache";
 
-export const PregnancyForm = () => {
+export const PregnancyForm: React.FC = () => {
   const { pregnancyFormData, setPregnancyField } = useFormStore();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/nutrition-form");
+    navigate("/pacientes/novo/nutricao");
   };
 
   const handleBack = () => {
-    navigate("/address-form");
+    navigate("/pacientes/novo/endereco");
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        backgroundColor: "#FAFAFA",
+        border: "1px solid #E0E0E0",
+        borderRadius: 2,
+        p: 3, // padding interno
+        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        maxWidth: 600,
+        margin: "40px auto",
+      }}
+    >
+      {/* --- Gestação --- */}
+      <TextField
+        label="Duração da Gestação"
+        placeholder="Em semanas, p. ex."
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.gestationDuration || ""}
+        onChange={(e) => setPregnancyField("gestationDuration", e.target.value)}
+      />
 
-      <FormGroup type="text" name="gestationDuration" placeholder="Duração" value={pregnancyFormData.gestationDuration || ""} onChange={(e) => setPregnancyField("gestationDuration", e.target.value)} />
+      <TextField
+        label="Idade da Mãe"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.motherAge || ""}
+        onChange={(e) => setPregnancyField("motherAge", e.target.value)}
+      />
 
-      <FormGroup type="text" name="motherAge" placeholder="Idade da Mãe" value={pregnancyFormData.motherAge || ""} onChange={(e) => setPregnancyField("motherAge", e.target.value)} />
+      <TextField
+        label="Acidentes"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.accidents || ""}
+        onChange={(e) => setPregnancyField("accidents", e.target.value)}
+      />
 
-      <FormGroup type="text" name="accidents" placeholder="Acidentes" value={pregnancyFormData.accidents || ""} onChange={(e) => setPregnancyField("accidents", e.target.value)} />
+      <TextField
+        label="Doenças durante a gravidez"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.diseasesDuringPregnancy || ""}
+        onChange={(e) =>
+          setPregnancyField("diseasesDuringPregnancy", e.target.value)
+        }
+      />
 
-      <FormGroup type="text" name="motherAge" placeholder="Doenças durante a gravidez" value={pregnancyFormData.diseasesDuringPregnancy || ""} onChange={(e) => setPregnancyField("diseasesDuringPregnancy", e.target.value)} />
-
-
-      <CheckboxGroup
-        name="prenatalTreatment"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.prenatalTreatment || false}
+            onChange={(e) =>
+              setPregnancyField("prenatalTreatment", e.target.checked)
+            }
+          />
+        }
         label="Tratamento Pré-Natal"
-        checked={pregnancyFormData.prenatalTreatment || false}
-        onChange={(e) => setPregnancyField("prenatalTreatment", e.target.checked)}
       />
 
-      <FormGroup type="text" name="medicationsDuringPregnancy" placeholder="Medicamentos" value={pregnancyFormData.medicationsDuringPregnancy || ""} onChange={(e) => setPregnancyField("medicationsDuringPregnancy", e.target.value)} />
+      <TextField
+        label="Medicamentos durante a gravidez"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.medicationsDuringPregnancy || ""}
+        onChange={(e) =>
+          setPregnancyField("medicationsDuringPregnancy", e.target.value)
+        }
+      />
 
-
-      <CheckboxGroup
-        name="hypotension"
+      {/* --- Condições médicas --- */}
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.hypotension || false}
+            onChange={(e) => setPregnancyField("hypotension", e.target.checked)}
+          />
+        }
         label="Hipotensão"
-        checked={pregnancyFormData.hypotension || false}
-        onChange={(e) => setPregnancyField("hypotension", e.target.checked)}
       />
-      <CheckboxGroup
-        name="hypertension"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.hypertension || false}
+            onChange={(e) => setPregnancyField("hypertension", e.target.checked)}
+          />
+        }
         label="Hipertensão"
-        checked={pregnancyFormData.hypertension || false}
-        onChange={(e) => setPregnancyField("hypertension", e.target.checked)}
       />
-      <CheckboxGroup
-        name="anemia"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.anemia || false}
+            onChange={(e) => setPregnancyField("anemia", e.target.checked)}
+          />
+        }
         label="Anemia"
-        checked={pregnancyFormData.anemia || false}
-        onChange={(e) => setPregnancyField("anemia", e.target.checked)}
       />
 
-      <FormGroup type="text" name="duracaoParto" placeholder="Duração do Parto" value={pregnancyFormData.deliveryDuration || ""} onChange={(e) => setPregnancyField("deliveryDuration", e.target.value)} />
+      {/* --- Parto --- */}
+      <TextField
+        label="Duração do Parto"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.deliveryDuration || ""}
+        onChange={(e) => setPregnancyField("deliveryDuration", e.target.value)}
+      />
 
-
-      <CheckboxGroup
-        name="normalDelivery"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.normalDelivery || false}
+            onChange={(e) =>
+              setPregnancyField("normalDelivery", e.target.checked)
+            }
+          />
+        }
         label="Parto Normal"
-        checked={pregnancyFormData.normalDelivery || false}
-        onChange={(e) => setPregnancyField("normalDelivery", e.target.checked)}
       />
-      <CheckboxGroup
-        name="forcepsDelivery"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.forcepsDelivery || false}
+            onChange={(e) =>
+              setPregnancyField("forcepsDelivery", e.target.checked)
+            }
+          />
+        }
         label="Fórceps"
-        checked={pregnancyFormData.forcepsDelivery || false}
-        onChange={(e) => setPregnancyField("forcepsDelivery", e.target.checked)}
       />
-      <CheckboxGroup
-        name="cesareanDelivery"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.cesareanDelivery || false}
+            onChange={(e) =>
+              setPregnancyField("cesareanDelivery", e.target.checked)
+            }
+          />
+        }
         label="Cesárea"
-        checked={pregnancyFormData.cesareanDelivery || false}
-        onChange={(e) => setPregnancyField("cesareanDelivery", e.target.checked)}
       />
-      <CheckboxGroup
-        name="anesthesia"
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.anesthesia || false}
+            onChange={(e) => setPregnancyField("anesthesia", e.target.checked)}
+          />
+        }
         label="Anestesia"
-        checked={pregnancyFormData.anesthesia || false}
-        onChange={(e) => setPregnancyField("anesthesia", e.target.checked)}
       />
-      <FormGroup type="text" name="peso" placeholder="Peso ao Nascer (g)" value={pregnancyFormData.birthWeight || ""} onChange={(e) => setPregnancyField("birthWeight", e.target.value)} />
 
-      <FormGroup type="text" name="comprimento" placeholder="Comprimento (cm)" value={pregnancyFormData.birthHeight || ""} onChange={(e) => setPregnancyField("birthHeight", e.target.value)} />
-      <CheckboxGroup
-        name="cried"
+      <TextField
+        label="Peso ao Nascer (g)"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.birthWeight || ""}
+        onChange={(e) => setPregnancyField("birthWeight", e.target.value)}
+      />
+
+      <TextField
+        label="Comprimento (cm)"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.birthHeight || ""}
+        onChange={(e) => setPregnancyField("birthHeight", e.target.value)}
+      />
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.cried || false}
+            onChange={(e) => setPregnancyField("cried", e.target.checked)}
+          />
+        }
         label="Chorou ao Nascer"
-        checked={pregnancyFormData.cried || false}
-        onChange={(e) => setPregnancyField("cried", e.target.checked)}
       />
-      <CheckboxGroup
-        name="cyanosis"
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={pregnancyFormData.cyanosis || false}
+            onChange={(e) => setPregnancyField("cyanosis", e.target.checked)}
+          />
+        }
         label="Cianose"
-        checked={pregnancyFormData.cyanosis || false}
-        onChange={(e) => setPregnancyField("cyanosis", e.target.checked)}
       />
 
-      <FormGroup type="text" name="observacoes" placeholder="Observações" value={pregnancyFormData.observations || ""} onChange={(e) => setPregnancyField("observations", e.target.value)} />
+      <TextField
+        label="Observações"
+        variant="outlined"
+        multiline
+        minRows={3}
+        fullWidth
+        value={pregnancyFormData.observations || ""}
+        onChange={(e) => setPregnancyField("observations", e.target.value)}
+      />
 
-      {/* Botões de ação */}
-      <div className={styles.buttonPagesContainer}>
-        <Button label="Voltar" onClick={handleBack} className={styles.buttonAction} variant="secondary" />
-        <Button label="Avançar" type="submit" className={styles.buttonAction} variant="primary" />
-      </div>
-    </form>
+      {/* Botões "Voltar" / "Avançar" */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          mt: 2,
+        }}
+      >
+        <Button variant="outlined" color="primary" onClick={handleBack}>
+          Voltar
+        </Button>
+        <Button type="submit" variant="contained" color="primary">
+          Avançar
+        </Button>
+      </Box>
+    </Box>
   );
 };
