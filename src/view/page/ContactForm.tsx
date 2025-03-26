@@ -14,6 +14,7 @@ export const ContactForm: React.FC = () => {
   };
 
   return (
+    console.log("Dados do formulário:", formData),
     <Box
       sx={{
         width: "100%",
@@ -99,12 +100,11 @@ export const ContactForm: React.FC = () => {
         {/* Data de Nascimento */}
         <TextField
           label="Data de Nascimento"
-          type="date"
-          value={formData.birthDate}
-          onChange={(e) => setField("birthDate", e.target.value)}
-          InputLabelProps={{ shrink: true }}
           variant="outlined"
           fullWidth
+          type="text"
+          value={formData.birthDate || ""}
+          onChange={(e) => setField("birthDate", e.target.value)}
         />
 
         {/* Idade */}

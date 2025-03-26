@@ -20,18 +20,18 @@ const drawerWidth = 240;
 const routeTitles: Record<string, string> = {
     "/": "Início",
     "/pacientes/novo": "Dados Pessoais",
-    "/address-form": "Endereço",
-    "/pregnancy-form": "Gravidez",
-    "/nutrition-form": "Nutrição",
-    "/sleep-form": "Sono",
-    "/psychomotor-development-form": "Desenvolvimento Psicomotor",
-    "/language-development-form": "Desenvolvimento da Linguagem",
-    "/phatological-history-form": "Histórico Patológico",
-    "/independence-form": "Independência e Compreensão",
-    "/school-history-form": "Histórico Escolar",
-    "/recreation-form": "Recreação",
-    "/habits-and-ticks-form": "Hábitos e Manias",
-    "/family-interrelation-form": "Relação Familiar",
+    "/pacientes/novo/endereco": "Endereço",
+    "/pacientes/novo/gestacao": "Gravidez",
+    "/pacientes/novo/nutricao": "Nutrição",
+    "/pacientes/novo/sono": "Sono",
+    "/pacientes/novo/desenvolvimento-psicomotor": "Desenvolvimento Psicomotor",
+    "/pacientes/novo/desenvolvimento-linguagem": "Desenvolvimento da Linguagem",
+    "/pacientes/novo/historico-patologico": "Histórico Patológico",
+    "/pacientes/novo/independencia": "Independência e Compreensão",
+    "/pacientes/novo/historico-escolar": "Histórico Escolar",
+    "/pacientes/novo/recreacao": "Recreação",
+    "/pacientes/novo/habitos-e-tiques": "Hábitos e Manias",
+    "/pacientes/novo/relacao-familiar": "Relação Familiar",
     "/pacientes/buscar": "Buscar Paciente",
 };
 
@@ -73,6 +73,7 @@ export const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children })
                             <ListItemButton
                                 onClick={() => {
                                     clearAllForm(); // 🧹 limpa os dados antigos
+                                    console.log("Estado resetado:", useFormStore.getState().formData);
                                     navigate("/pacientes/novo"); // vai para o início do cadastro
                                 }}
                             >

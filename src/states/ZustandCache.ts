@@ -206,6 +206,8 @@ export const useFormStore = create<StoreState>()(
                     schoolHistoryFormData: { ...initialSchoolHistoryFormData },
                     recreationFormData: { ...initialRecreationFormData },
                     familyInterrelationFormData: { ...initialFamilyInterrelationshipFormData },
+                    habitsAndTicksFormData: { ...initialHabitsAndTicksFormData },
+                    mainComplaint: "",
 
                 })),
         }),
