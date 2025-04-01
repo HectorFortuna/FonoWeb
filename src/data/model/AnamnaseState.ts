@@ -32,7 +32,11 @@ export interface PatientFormData {
   birthDate?: string;
   patientAge?: string;
   phoneNumber?: string;
-  career?: string;
+  motherCareer?: string;
+  fatherCareer?: string;
+  medications?: string;
+  livesWith?: string;
+  caregiver?: string;
   address: Address[];
   siblings: Sibling[];
 }
@@ -53,9 +57,9 @@ export interface PregnancyFormData {
   gestationDuration?: string;
   motherAge?: string;
   prenatalTreatment?: boolean;
-  accidents?: string; // mudar para string no db
-  diseasesDuringPregnancy?: string; //mudar para string no db
-  medicationsDuringPregnancy?: string; // mudar para string no db
+  accidents?: string;
+  diseasesDuringPregnancy?: string;
+  medicationsDuringPregnancy?: string;
   hypotension?: boolean;
   hypertension?: boolean;
   anemia?: boolean;
@@ -65,9 +69,16 @@ export interface PregnancyFormData {
   cesareanDelivery?: boolean;
   anesthesia?: boolean;
   birthWeight?: string;
-  birthHeight?: string; // adicionar db
+  birthHeight?: string;
   cried?: boolean;
   cyanosis?: boolean;
+  pregnancyExperience?: string;
+  coupleRelationship?: string;
+  maternalHealthConditions?: string;
+  motherBabyHealthPostpartum?: string;
+  postpartumExperience?: string;
+  postpartumDepression?: string;
+  firstDaysAtHome?: string;
   observations?: string;
 
 }
@@ -75,13 +86,17 @@ export interface PregnancyFormData {
 export interface NutritionFormData {
   breastfeeding?: boolean;
   breastfeedingDuration?: string;
-  artificialFeeding?: boolean;
-  artificialFeedingDuration?: string;
   goodSuctionSwallowing?: boolean;
   choking?: boolean;
   vomiting?: boolean;
   forcedEat?: boolean;
   currentFeeding?: string;
+  weaning?: string;
+  bottleFeedingAge?: string;
+  solidFoodIntroductionAge?: string;
+  acceptsDifferentTextures?: boolean;
+  feedingIssuesDescription?: string;
+  foodSelectivity?: boolean;
   observations?: string;
 }
 
@@ -94,6 +109,14 @@ export interface SleepFormData {
   sleepwalking?: boolean;
   sleepsWithMouthOpen?: boolean;
   drools?: boolean;
+  asBabyNoProblems?: boolean;
+  asBabySleptAlone?: boolean;
+  asBabySharedWith?: string;
+  asBabySleepDifficulties?: string;
+  currentNoProblems?: boolean;
+  currentSleptAlone?: boolean;
+  currentSharedWith?: string;
+  currentSleepDifficulties?: string;
   observations?: string;
 }
 
@@ -105,9 +128,9 @@ export interface PsychomotorDevelopmentFormData {
   floppyOrFirmBaby?: string;
   fallingFrequency?: string;
   grabbedObjectsAge?: string;
-  canJump?: boolean; // adicionar no db
+  canJump?: boolean;
   walkingDefects?: string;
-  goodDirectionSense?: string; //mudar no db
+  goodDirectionSense?: string;
   sphincterControl?: boolean;
   bumpsIntoThings?: boolean;
   dropsThingsFromHands?: boolean
@@ -115,16 +138,30 @@ export interface PsychomotorDevelopmentFormData {
   orthopedicProblems?: boolean;
   usedBoots?: boolean;
   dailyActivities?: string;
+  walksOnTiptoes?: boolean;
+  swingsWhenWalking?: boolean;
+  hasBalanceIssues?: boolean;
+  difficultyRunningClimbing?: boolean;
+  postureProblems?: boolean;
+  difficultyWithObjects?: boolean;
+  difficultyPlaying?: boolean;
+  motorExamples?: string;
+  bathAlone?: boolean;
+  brushesTeethAlone?: boolean;
+  cleansSelf?: boolean;
+  difficultyWithHygieneSequence?: boolean;
+  dressesSelf?: boolean;
+  buttonsClothes?: boolean;
+  tiesShoes?: boolean;
   observations?: string;
-
 }
 
 export interface LanguageDevelopmentFormData {
   babbled?: string;
-  syllableRepetition?: string; //mudar no db
-  wordsWithMeaning?: string; //mudar no db
-  simpleCompleteSentences?: string; //mudar no db
-  understoodByAllWhen?: string; //mudar no db
+  syllableRepetition?: string;
+  wordsWithMeaning?: string;
+  simpleCompleteSentences?: string;
+  understoodByAllWhen?: string;
   stutteredAround?: string;
   understandsCommands?: boolean;
   emitsPrimitiveSound?: boolean;
@@ -133,8 +170,35 @@ export interface LanguageDevelopmentFormData {
   sings?: boolean;
   knowsSongs?: boolean;
   observations?: string;
+  firstVocalizationsAge?: string;
+  firstWords?: string;
+  firstSentences?: string;
+  speechDelay?: string;
+  gestureHelp?: boolean;
+  gestureShare?: boolean;
+  gestureNodYes?: boolean;
+  gestureNodNo?: boolean;
+  gestureWave?: boolean;
+  gestureBlowKiss?: boolean;
+  gestureImitate?: boolean;
+  gestureClap?: boolean;
+  gestureLiftArms?: boolean;
+  gestureShakeFingerNo?: boolean;
+  looksWhenPointed?: boolean;
+  usesAdultHand?: boolean;
+  answersToName?: boolean;
+  speechArticulation?: string;
+  speechRhythm?: string;
+  echolalia?: boolean;
+  repeatsPhrases?: boolean;
+  pronounConfusion?: boolean;
+  inventsWords?: boolean;
+  strangeWordCombinations?: boolean;
+  insistsOnRepetition?: boolean;
+  reactionWhenContradicted?: string;
 
 }
+
 
 export interface PhatologicalHistoryFormData {
   physicalMalformations?: boolean;
@@ -142,25 +206,21 @@ export interface PhatologicalHistoryFormData {
   smallpox?: boolean;
   highFever?: boolean;
   fallsBlows?: boolean;
-  psychosomaticDisorders?: string; //mudar no db
+  psychosomaticDisorders?: string;
   tonsilsAdenoids?: boolean;
-  operationsDone?: string; //mudar no db
+  operationsDone?: string;
   seesWell?: boolean;
   wearsGlasses?: boolean;
   optometristReason?: string;
   optometristResult?: string;
   hearingProblems?: boolean;
   whichEar?: string;
-  hearingProblem?: boolean;
-  prefersLoudSpeech?: boolean;
-  frequentlyHoarse?: boolean;
-  annoyedByNoise?: boolean;
-  speaksLoud?: boolean;
-  understandsWell?: boolean;
-  looksLips?: boolean;
   howUnderstand?: string;
-  attendedTherapy?: string; //mudar no db
+  attendedTherapy?: string;
   observations?: string;
+  familyDevelopmentHistory?: string;
+  familySurgeriesHospitalizations?: string;
+
 }
 
 export interface HabitsAndTicksFormData {
@@ -173,6 +233,25 @@ export interface HabitsAndTicksFormData {
   bitesNails?: boolean;
   nailBitingHand?: string;
   observations?: string;
+
+  alignsObjects?: boolean;
+  playsWithPartsOnly?: boolean;
+  opensAndClosesObjects?: boolean;
+  reactionWhenPlayInterrupted?: string;
+  rigidPretendPlay?: boolean;
+  resistsRoutineChange?: boolean;
+  fixedActivitySequence?: boolean;
+  reactionToInterruption?: string;
+  attachedToUnusualObjects?: boolean;
+  handNearFace?: boolean;
+  handsNearBody?: boolean;
+  bodySwing?: boolean;
+  armFlapping?: boolean;
+  fears?: string;
+  sensoryInterest?: boolean;
+  soundSensitivity?: boolean;
+  inappropriateTouch?: boolean;
+  hyperactivity?: boolean;
 }
 
 export interface IndependenceComprehensionFormData {
@@ -205,6 +284,19 @@ export interface RecreationFormData {
   adaptsHasFriends?: boolean;
   favoriteBooksAndTvShows?: string;
   observations?: string;
+  playsWithObjects?: boolean;
+  typicalExploration?: string;
+  atypicalExploration?: string;
+  functionalPlay?: boolean;
+  symbolicPlayWithMiniatures?: boolean;
+  symbolicPlayWithObjects?: boolean;
+  symbolicPlayWithRoles?: boolean;
+  operateConsistently?: string;
+  pretendPlayMiniatures?: string;
+  pretendPlayObjects?: string;
+  pretendPlayRoles?: string;
+
+
 }
 
 export interface FamilyInterrelationFormData {
@@ -213,7 +305,37 @@ export interface FamilyInterrelationFormData {
   relationshipSiblings?: string;
   relationshipOthers?: string;
   observations?: string;
+
+  headOrientationToAdult?: string;
+  smilesAtFamiliarPeople?: string;
+  smilesAtUnfamiliarPeople?: string;
+  smilesInResponse?: string;
+  facialExpressionVariation?: string;
+  emotionalExpressionContext?: string;
+  isAffectionate?: string;
+  sharesPleasure?: string;
+  caresAboutParents?: string;
+  jointAttentionPointing?: string;
+  commentsGesturesOrSpeech?: string;
+  followsPointing?: string;
+  respondsToPlayInvitation?: string;
+  initiatesWithChildren?: string;
+  respondsButNoInitiative?: string;
+  anxiousWithChildren?: string;
+  stereotypedPlayOnly?: string;
+  prefersPairPlay?: string;
+  anxiousWithStrangers?: string;
+  avoidsStrangerContact?: string;
+  persistentAggression?: string;
+  excessiveDisinhibition?: string;
+  contextualBehaviorVariation?: string;
+  worriesWhenApart?: string;
+  smilesAtParentsReturn?: string;
+  asksParentsForHelp?: string;
+  checksParentsInNewPlaces?: string;
+  schoolAdaptation?: string;
 }
+
 
 export interface StoreState {
   formData: PatientFormData;

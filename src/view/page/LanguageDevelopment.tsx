@@ -147,6 +147,149 @@ export const LanguageDevelopment: React.FC = () => {
                 label="Conhece músicas"
             />
 
+            {/* Página 48 - Linguagem/Comunicação */}
+            <TextField
+                label="Idade das primeiras vocalizações"
+                fullWidth
+                variant="outlined"
+                value={languageDevelopmentFormData.firstVocalizationsAge || ""}
+                onChange={(e) => setLanguageDevelopmentField("firstVocalizationsAge", e.target.value)}
+            />
+
+            <TextField
+                label="Idade das primeiras palavras (Quais?)"
+                fullWidth
+                variant="outlined"
+                value={languageDevelopmentFormData.firstWords || ""}
+                onChange={(e) => setLanguageDevelopmentField("firstWords", e.target.value)}
+            />
+
+            <TextField
+                label="Idade das primeiras frases (Exemplos)"
+                fullWidth
+                variant="outlined"
+                value={languageDevelopmentFormData.firstSentences || ""}
+                onChange={(e) => setLanguageDevelopmentField("firstSentences", e.target.value)}
+            />
+
+            <TextField
+                label="Houve algum atraso no aparecimento da fala?"
+                fullWidth
+                variant="outlined"
+                value={languageDevelopmentFormData.speechDelay || ""}
+                onChange={(e) => setLanguageDevelopmentField("speechDelay", e.target.value)}
+            />
+
+            {/* Página 49 - Gestos */}
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureHelp || false} onChange={(e) => setLanguageDevelopmentField("gestureHelp", e.target.checked)} />}
+                label="Apontar para solicitar ajuda"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureShare || false} onChange={(e) => setLanguageDevelopmentField("gestureShare", e.target.checked)} />}
+                label="Apontar para compartilhar"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureNodYes || false} onChange={(e) => setLanguageDevelopmentField("gestureNodYes", e.target.checked)} />}
+                label="Assentimento com a cabeça"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureNodNo || false} onChange={(e) => setLanguageDevelopmentField("gestureNodNo", e.target.checked)} />}
+                label="Negação com a cabeça"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureWave || false} onChange={(e) => setLanguageDevelopmentField("gestureWave", e.target.checked)} />}
+                label="Abanar"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureBlowKiss || false} onChange={(e) => setLanguageDevelopmentField("gestureBlowKiss", e.target.checked)} />}
+                label="Assoprar beijos"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureImitate || false} onChange={(e) => setLanguageDevelopmentField("gestureImitate", e.target.checked)} />}
+                label='Imitar "gracinhas"'
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureClap || false} onChange={(e) => setLanguageDevelopmentField("gestureClap", e.target.checked)} />}
+                label="Bater palmas"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureLiftArms || false} onChange={(e) => setLanguageDevelopmentField("gestureLiftArms", e.target.checked)} />}
+                label="Levantar os braços para pedir colo"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.gestureShakeFingerNo || false} onChange={(e) => setLanguageDevelopmentField("gestureShakeFingerNo", e.target.checked)} />}
+                label='Sacudir o dedo para dizer "não"'
+            />
+
+            {/* Padrão de Comunicação */}
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.looksWhenPointed || false} onChange={(e) => setLanguageDevelopmentField("looksWhenPointed", e.target.checked)} />}
+                label="Olha quando apontam para algo"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.usesAdultHand || false} onChange={(e) => setLanguageDevelopmentField("usesAdultHand", e.target.checked)} />}
+                label="Usa a mão do adulto para abrir ou alcançar"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.answersToName || false} onChange={(e) => setLanguageDevelopmentField("answersToName", e.target.checked)} />}
+                label="Atende ao nome"
+            />
+
+            <TextField
+                label="Como é a articulação e a pronúncia? Há dificuldade de entendimento?"
+                fullWidth
+                variant="outlined"
+                value={languageDevelopmentFormData.speechArticulation || ""}
+                onChange={(e) => setLanguageDevelopmentField("speechArticulation", e.target.value)}
+            />
+
+            <TextField
+                label="Como é o ritmo e entonação da fala?"
+                fullWidth
+                variant="outlined"
+                value={languageDevelopmentFormData.speechRhythm || ""}
+                onChange={(e) => setLanguageDevelopmentField("speechRhythm", e.target.value)}
+            />
+
+            {/* Estereotipias de fala */}
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.echolalia || false} onChange={(e) => setLanguageDevelopmentField("echolalia", e.target.checked)} />}
+                label="Repete a última palavra ou frase ouvida (ecolalia)"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.repeatsPhrases || false} onChange={(e) => setLanguageDevelopmentField("repeatsPhrases", e.target.checked)} />}
+                label="Repete frases ouvidas anteriormente"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.pronounConfusion || false} onChange={(e) => setLanguageDevelopmentField("pronounConfusion", e.target.checked)} />}
+                label="Confunde eu/tu/ele"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.inventsWords || false} onChange={(e) => setLanguageDevelopmentField("inventsWords", e.target.checked)} />}
+                label="Inventa palavras ou frases"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.strangeWordCombinations || false} onChange={(e) => setLanguageDevelopmentField("strangeWordCombinations", e.target.checked)} />}
+                label="Combina palavras de forma estranha"
+            />
+            <FormControlLabel
+                control={<Checkbox checked={languageDevelopmentFormData.insistsOnRepetition || false} onChange={(e) => setLanguageDevelopmentField("insistsOnRepetition", e.target.checked)} />}
+                label="Insiste em repetir palavras ou frases da mesma forma"
+            />
+
+            {/* Reação ao ser contrariado */}
+            <TextField
+                label="Como reage quando contrariado?"
+                fullWidth
+                multiline
+                minRows={2}
+                variant="outlined"
+                value={languageDevelopmentFormData.reactionWhenContradicted || ""}
+                onChange={(e) => setLanguageDevelopmentField("reactionWhenContradicted", e.target.value)}
+            />
+
+
             <TextField
                 label="Observações"
                 fullWidth

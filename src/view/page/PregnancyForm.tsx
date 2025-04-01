@@ -30,7 +30,7 @@ export const PregnancyForm: React.FC = () => {
         backgroundColor: "#FAFAFA",
         border: "1px solid #E0E0E0",
         borderRadius: 2,
-        p: 3, // padding interno
+        p: 3,
         boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",
         display: "flex",
         flexDirection: "column",
@@ -95,6 +95,36 @@ export const PregnancyForm: React.FC = () => {
         onChange={(e) =>
           setPregnancyField("medicationsDuringPregnancy", e.target.value)
         }
+      />
+
+      <TextField
+        label="Como foi a gestação? (descoberta, estado emocional, mudanças, etc.)"
+        variant="outlined"
+        multiline
+        minRows={3}
+        fullWidth
+        value={pregnancyFormData.pregnancyExperience || ""}
+        onChange={(e) => setPregnancyField("pregnancyExperience", e.target.value)}
+      />
+
+      <TextField
+        label="Como estava a relação do casal durante a gestação?"
+        variant="outlined"
+        multiline
+        minRows={2}
+        fullWidth
+        value={pregnancyFormData.coupleRelationship || ""}
+        onChange={(e) => setPregnancyField("coupleRelationship", e.target.value)}
+      />
+
+      <TextField
+        label="Condições de saúde materna durante a gestação"
+        variant="outlined"
+        multiline
+        minRows={3}
+        fullWidth
+        value={pregnancyFormData.maternalHealthConditions || ""}
+        onChange={(e) => setPregnancyField("maternalHealthConditions", e.target.value)}
       />
 
       {/* --- Condições médicas --- */}
@@ -222,6 +252,45 @@ export const PregnancyForm: React.FC = () => {
         fullWidth
         value={pregnancyFormData.observations || ""}
         onChange={(e) => setPregnancyField("observations", e.target.value)}
+      />
+
+      {/* --- Pós-parto --- */}
+      <TextField
+        label="Como foi o pós-parto?"
+        variant="outlined"
+        multiline
+        minRows={2}
+        fullWidth
+        value={pregnancyFormData.postpartumExperience || ""}
+        onChange={(e) => setPregnancyField("postpartumExperience", e.target.value)}
+      />
+
+      <TextField
+        label="Condições de saúde do bebê e da mãe após o parto"
+        variant="outlined"
+        multiline
+        minRows={2}
+        fullWidth
+        value={pregnancyFormData.motherBabyHealthPostpartum || ""}
+        onChange={(e) => setPregnancyField("motherBabyHealthPostpartum", e.target.value)}
+      />
+
+      <TextField
+        label="Apresentou depressão pós-parto?"
+        variant="outlined"
+        fullWidth
+        value={pregnancyFormData.postpartumDepression || ""}
+        onChange={(e) => setPregnancyField("postpartumDepression", e.target.value)}
+      />
+
+      <TextField
+        label="Como foram os primeiros dias em casa? (sono, amamentação, rede de apoio)"
+        variant="outlined"
+        multiline
+        minRows={2}
+        fullWidth
+        value={pregnancyFormData.firstDaysAtHome || ""}
+        onChange={(e) => setPregnancyField("firstDaysAtHome", e.target.value)}
       />
 
       {/* Botões "Voltar" / "Avançar" */}

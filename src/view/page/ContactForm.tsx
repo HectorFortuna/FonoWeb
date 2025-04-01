@@ -88,6 +88,16 @@ export const ContactForm: React.FC = () => {
           fullWidth
         />
 
+
+        {/* Profissão do pai */}
+        <TextField
+          label="Profissão do pai"
+          variant="outlined"
+          value={formData.fatherCareer}
+          onChange={(e) => setField("fatherCareer", e.target.value)}
+          fullWidth
+        />
+
         {/* Mãe */}
         <TextField
           label="Nome da Mãe"
@@ -96,6 +106,16 @@ export const ContactForm: React.FC = () => {
           onChange={(e) => setField("motherName", e.target.value)}
           fullWidth
         />
+
+        {/* Profissão da mãe */}
+        <TextField
+          label="Profissão da mãe"
+          variant="outlined"
+          value={formData.motherCareer}
+          onChange={(e) => setField("motherCareer", e.target.value)}
+          fullWidth
+        />
+
 
         {/* Data de Nascimento */}
         <TextField
@@ -127,14 +147,33 @@ export const ContactForm: React.FC = () => {
           fullWidth
         />
 
-        {/* Profissão */}
+        {/* Uso de Medicação Contínua */}
         <TextField
-          label="Profissão"
+          label="Uso de medicação contínua (quais?)"
           variant="outlined"
-          value={formData.career}
-          onChange={(e) => setField("career", e.target.value)}
+          value={formData.medications || ""}
+          onChange={(e) => setField("medications", e.target.value)}
           fullWidth
         />
+
+        {/* Quem vive com a criança */}
+        <TextField
+          label="Quem vive com a criança?"
+          variant="outlined"
+          value={formData.livesWith || ""}
+          onChange={(e) => setField("livesWith", e.target.value)}
+          fullWidth
+        />
+
+        {/* Quem cuida na ausência */}
+        <TextField
+          label="Quem cuida da criança na ausência dos responsáveis?"
+          variant="outlined"
+          value={formData.caregiver || ""}
+          onChange={(e) => setField("caregiver", e.target.value)}
+          fullWidth
+        />
+
 
         {/* Campos de Irmãos */}
         {formData.siblings.map((sibling: any, index: number) => (

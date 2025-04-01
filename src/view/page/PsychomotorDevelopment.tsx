@@ -3,6 +3,10 @@ import {
     Box,
     Button,
     Checkbox,
+    FormControl,
+    FormLabel,
+    RadioGroup,
+    Radio,
     FormControlLabel,
     TextField,
 } from "@mui/material";
@@ -20,8 +24,31 @@ export const PsychomotorDevelopment: React.FC = () => {
     };
 
     const handleBack = () => {
-        navigate("/pacientes/novo/gestacao/sono");
+        navigate("/pacientes/novo/sono");
     };
+
+    const renderSelfCareRadioGroup = (
+        label: string,
+        field: keyof typeof psychomotorDevelopmentFormData
+    ) => (
+        <FormControl component="fieldset" sx={{ mt: 2 }}>
+            <FormLabel component="legend">{label}</FormLabel>
+            <RadioGroup
+                row
+                value={psychomotorDevelopmentFormData[field] || ""}
+                onChange={(e) => setPsychomotorDevelopmentField(field, e.target.value)}
+            >
+                <FormControlLabel value="sim" control={<Radio />} label="Sim" />
+                <FormControlLabel value="nao" control={<Radio />} label="Não" />
+                <FormControlLabel
+                    value="com_dificuldade"
+                    control={<Radio />}
+                    label="Com dificuldade"
+                />
+            </RadioGroup>
+        </FormControl>
+    );
+
 
     return (
         <Box
@@ -225,6 +252,96 @@ export const PsychomotorDevelopment: React.FC = () => {
                     setPsychomotorDevelopmentField("dailyActivities", e.target.value)
                 }
             />
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.walksOnTiptoes || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("walksOnTiptoes", e.target.checked)
+                        }
+                    />
+                }
+                label="Caminha na ponta dos pés"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.swingsWhenWalking || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("swingsWhenWalking", e.target.checked)
+                        }
+                    />
+                }
+                label="Balança-se ao andar"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.hasBalanceIssues || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("hasBalanceIssues", e.target.checked)
+                        }
+                    />
+                }
+                label="Apresenta desequilíbrio"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.difficultyRunningClimbing || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("difficultyRunningClimbing", e.target.checked)
+                        }
+                    />
+                }
+                label="Dificuldade para correr e escalar"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.postureProblems || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("postureProblems", e.target.checked)
+                        }
+                    />
+                }
+                label="Problemas de postura"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.difficultyWithObjects || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("difficultyWithObjects", e.target.checked)
+                        }
+                    />
+                }
+                label="Dificuldade de manipular objetos com os dedos"
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={psychomotorDevelopmentFormData.difficultyPlaying || false}
+                        onChange={(e) =>
+                            setPsychomotorDevelopmentField("difficultyPlaying", e.target.checked)
+                        }
+                    />
+                }
+                label="Dificuldade para jogar bola, correr, pular, chutar ou pedalar"
+            />
+            {renderSelfCareRadioGroup("Toma banho sozinha", "bathAlone")}
+            {renderSelfCareRadioGroup("Escova os dentes sozinha", "brushesTeethAlone")}
+            {renderSelfCareRadioGroup("Limpa-se sozinha", "cleansSelf")}
+            {renderSelfCareRadioGroup("Ao cuidar da própria higiene se atrapalha com a sequência da tarefa", "difficultyWithHygieneSequence")}
+            {renderSelfCareRadioGroup("Veste-se", "dressesSelf")}
+            {renderSelfCareRadioGroup("Abotoa suas roupas", "buttonsClothes")}
+            {renderSelfCareRadioGroup("Amarra cadarços", "tiesShoes")}
 
             <TextField
                 label="Observações"

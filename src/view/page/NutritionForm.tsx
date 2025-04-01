@@ -1,3 +1,4 @@
+// NutritionForm.tsx
 import React from "react";
 import {
     Box,
@@ -62,29 +63,6 @@ export const NutritionForm: React.FC = () => {
                 }
             />
 
-            {/* Alimentação artificial */}
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={nutritionFormData.artificialFeeding || false}
-                        onChange={(e) =>
-                            setNutritionField("artificialFeeding", e.target.checked)
-                        }
-                    />
-                }
-                label="Alimentação artificial"
-            />
-
-            <TextField
-                label="Até quando alimentou"
-                variant="outlined"
-                fullWidth
-                value={nutritionFormData.artificialFeedingDuration || ""}
-                onChange={(e) =>
-                    setNutritionField("artificialFeedingDuration", e.target.value)
-                }
-            />
-
             {/* Sucção / deglutição */}
             <FormControlLabel
                 control={
@@ -138,6 +116,67 @@ export const NutritionForm: React.FC = () => {
                     setNutritionField("currentFeeding", e.target.value)
                 }
             />
+
+            {/* Novos campos do PDF */}
+
+            <TextField
+                label="Como foi o desmame? (idade e circunstâncias)"
+                variant="outlined"
+                fullWidth
+                value={nutritionFormData.weaning || ""}
+                onChange={(e) => setNutritionField("weaning", e.target.value)}
+            />
+
+            <TextField
+                label="Tomou mamadeira? Se sim, idade:"
+                variant="outlined"
+                fullWidth
+                value={nutritionFormData.bottleFeedingAge || ""}
+                onChange={(e) => setNutritionField("bottleFeedingAge", e.target.value)}
+            />
+
+            <TextField
+                label="Introdução de sólidos: idade"
+                variant="outlined"
+                fullWidth
+                value={nutritionFormData.solidFoodIntroductionAge || ""}
+                onChange={(e) => setNutritionField("solidFoodIntroductionAge", e.target.value)}
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={nutritionFormData.acceptsDifferentTextures || false}
+                        onChange={(e) =>
+                            setNutritionField("acceptsDifferentTextures", e.target.checked)
+                        }
+                    />
+                }
+                label="Aceita sólidos de diferentes consistências"
+            />
+
+            <TextField
+                label="Apresenta problemas na alimentação (ex: mastigação, apetite, voracidade)"
+                variant="outlined"
+                fullWidth
+                multiline
+                minRows={2}
+                value={nutritionFormData.feedingIssuesDescription || ""}
+                onChange={(e) => setNutritionField("feedingIssuesDescription", e.target.value)}
+            />
+
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={nutritionFormData.foodSelectivity || false}
+                        onChange={(e) =>
+                            setNutritionField("foodSelectivity", e.target.checked)
+                        }
+                    />
+                }
+                label="Apresenta particularidades em relação à comida (ex: hiperseletividade)"
+            />
+
 
             {/* Observações */}
             <TextField

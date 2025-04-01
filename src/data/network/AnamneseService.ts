@@ -12,7 +12,12 @@ export const preparePatientData = () => {
     birthDate: formData.birthDate || "",
     age: formData.patientAge || "",
     phone: formData.phoneNumber || "",
-    career: formData.career || "",
+    motherCareer: formData.motherCareer || "",
+    fatherCareer: formData.fatherCareer || "",
+    medications: formData.medications || "",
+    livesWith: formData.livesWith || "",
+    caregiver: formData.caregiver || "",
+
     school: formData.school || "",
     siblings: Array.isArray(formData.siblings) ? formData.siblings.map((sibling) => ({
       name: sibling.siblingsName || "",
@@ -31,7 +36,7 @@ export const preparePatientData = () => {
 
 // 🔹 Função para preparar os dados da anamnese com o patientId
 export const prepareAnamneseData = (patientId: string) => {
-  const { pregnancyFormData, nutritionFormData, sleepFormData, psychomotorDevelopmentFormData, languageDevelopmentFormData, phatologicalHistoryFormData, independenceComprehensionFormData, schoolHistoryFormData, recreationFormData, familyInterrelationFormData,habitsAndTicksFormData,mainComplaint,evaluationData } = useFormStore.getState();
+  const { pregnancyFormData, nutritionFormData, sleepFormData, psychomotorDevelopmentFormData, languageDevelopmentFormData, phatologicalHistoryFormData, independenceComprehensionFormData, schoolHistoryFormData, recreationFormData, familyInterrelationFormData, habitsAndTicksFormData, mainComplaint, evaluationData } = useFormStore.getState();
 
   return {
     patientId,

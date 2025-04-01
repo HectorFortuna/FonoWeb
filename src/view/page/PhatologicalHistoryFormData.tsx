@@ -133,7 +133,7 @@ export const PhatologicalHistory: React.FC = () => {
                         onChange={(e) => setPhatologicalHistoryField("seesWell", e.target.checked)}
                     />
                 }
-                label="Vê bem"
+                label="Visão normal"
             />
 
             <FormControlLabel
@@ -207,7 +207,26 @@ export const PhatologicalHistory: React.FC = () => {
                     setPhatologicalHistoryField("attendedTherapy", e.target.value)
                 }
             />
+            {/* BACKGROUND FAMILIAR */}
+            <TextField
+                label="Histórico de desenvolvimento na família (pais, irmãos, outros)"
+                fullWidth
+                multiline
+                minRows={4}
+                variant="outlined"
+                value={phatologicalHistoryFormData.familyDevelopmentHistory || ""}
+                onChange={(e) => setPhatologicalHistoryField("familyDevelopmentHistory", e.target.value)}
+            />
 
+            <TextField
+                label="Cirurgias e hospitalizações dos pais ou irmãos"
+                fullWidth
+                multiline
+                minRows={3}
+                variant="outlined"
+                value={phatologicalHistoryFormData.familySurgeriesHospitalizations || ""}
+                onChange={(e) => setPhatologicalHistoryField("familySurgeriesHospitalizations", e.target.value)}
+            />
             <TextField
                 label="Observações"
                 fullWidth
